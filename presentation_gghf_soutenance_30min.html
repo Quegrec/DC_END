@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GGHF — Soutenance Finale · Thomas QUERREC · Mastère Tech Lead</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B0F19',
+            night: '#1E293B',
+            mint: '#34D399',
+            leaf: '#10B981',
+            cyanx: '#0EA5E9',
+            coral: '#F97316'
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root { color-scheme: dark; }
+    html, body, .reveal-viewport, .reveal, .backgrounds {
+      background: #0B0F19 !important;
+      background-color: #0B0F19 !important;
+    }
+    .reveal .slide-background, .reveal .slide-background-content { background-color: #0B0F19 !important; }
+    .reveal { font-family: 'Inter', sans-serif; font-size: 30px; color: #E2E8F0; }
+    .reveal h1, .reveal h2, .reveal h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .reveal .slides section { text-align: left; }
+    .reveal .progress { height: 4px; color: #34D399; background: rgba(148,163,184,0.15); }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: 1rem;
+    }
+    .glass-strong {
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 1rem;
+    }
+
+    .halo { position: fixed; border-radius: 9999px; filter: blur(120px); opacity: 0.12; pointer-events: none; z-index: 0; }
+    .halo-1 { width: 620px; height: 620px; top: -180px; left: -160px; background: #0EA5E9; }
+    .halo-2 { width: 560px; height: 560px; bottom: -200px; right: -140px; background: #10B981; }
+    .halo-3 { width: 380px; height: 380px; top: 40%; left: 55%; background: #F97316; opacity: 0.05; }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .58em; letter-spacing: .14em;
+      text-transform: uppercase; padding: .35em 1em; border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, 0.35); color: #34D399;
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .chip-orange { border-color: rgba(249, 115, 22, 0.4); color: #FB923C; background: rgba(249, 115, 22, 0.08); }
+    .chip-cyan { border-color: rgba(14, 165, 233, 0.4); color: #38BDF8; background: rgba(14, 165, 233, 0.08); }
+
+    .grad-text {
+      background: linear-gradient(100deg, #34D399 0%, #0EA5E9 60%, #38BDF8 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .node {
+      border-radius: .75rem; border: 1px solid rgba(148,163,184,.2);
+      background: rgba(15,23,42,.7); padding: .6rem .9rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .arrow { color: #475569; font-family: 'JetBrains Mono', monospace; }
+
+    #deck-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 18px; pointer-events: none;
+    }
+    #deck-header .cluster { display: flex; align-items: center; gap: 10px; pointer-events: auto; }
+    #deck-header .brand {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .18em;
+      color: #64748B; text-transform: uppercase;
+    }
+    .nav-btn {
+      width: 30px; height: 30px; display: grid; place-items: center;
+      border-radius: 8px; border: 1px solid rgba(148,163,184,.18);
+      background: rgba(15,23,42,.6); color: #94A3B8; font-size: 13px;
+      cursor: pointer; transition: all .15s ease; backdrop-filter: blur(8px);
+    }
+    .nav-btn:hover { color: #34D399; border-color: rgba(52,211,153,.4); }
+    #slide-counter {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94A3B8;
+      border: 1px solid rgba(148,163,184,.18); background: rgba(15,23,42,.6);
+      border-radius: 8px; padding: 6px 12px; backdrop-filter: blur(8px);
+    }
+
+    table.bench { border-collapse: separate; border-spacing: 0; width: 100%; }
+    table.bench th {
+      font-family: 'JetBrains Mono', monospace; font-size: .5em; letter-spacing: .1em;
+      text-transform: uppercase; color: #64748B; text-align: left;
+      padding: .5em .8em; border-bottom: 1px solid rgba(148,163,184,.15);
+    }
+    table.bench td { font-size: .62em; padding: .55em .8em; border-bottom: 1px solid rgba(148,163,184,.08); color: #CBD5E1; }
+
+    .pyr { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+
+    /* Fragment qui n'occupe aucun espace avant d'être révélé
+       (contrairement au fragment standard qui réserve sa place) */
+    .reveal .fragment.appear-grow { display: none; }
+    .reveal .fragment.appear-grow.visible { display: block; }
+
+    .src {
+      display: block; margin-top: .9rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .38em;
+      letter-spacing: .04em; color: #64748B; line-height: 1.5;
+    }
+    .src::before { content: "SOURCES \2192  "; color: #475569; letter-spacing: .14em; }
+  </style>
+</head>
+<body>
+
+  <div class="halo halo-1"></div>
+  <div class="halo halo-2"></div>
+  <div class="halo halo-3"></div>
+
+  <header id="deck-header">
+    <div class="cluster">
+      <span class="brand">GGHF · Soutenance Mastère TL · Thomas Querrec</span>
+    </div>
+    <div class="cluster">
+      <button class="nav-btn" onclick="Reveal.prev()" title="Diapositive précédente">&#9664;</button>
+      <button class="nav-btn" onclick="Reveal.next()" title="Diapositive suivante">&#9654;</button>
+      <span id="slide-counter">1 / 1</span>
+      <button class="nav-btn" onclick="openNotes()" title="Notes de l'orateur (ou touche S)">&#9998;</button>
+      <button class="nav-btn" onclick="toggleFullscreen()" title="Plein écran (ou touche F)">&#x26F6;</button>
+    </div>
+  </header>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============ 1. TITRE ============ -->
+      <section>
+        <div class="flex flex-col items-center justify-center text-center h-full pt-8">
+          <span class="chip mb-8">Soutenance finale &middot; Mast&egrave;re Digital Campus &middot; 30 min</span>
+          <h1 class="font-display font-extrabold text-[2.6em] leading-tight mb-2">
+            <span class="grad-text">GGHF</span>
+          </h1>
+          <p class="font-display font-bold text-[1.05em] text-slate-200 mb-5">Good Game, Have Fun</p>
+          <p class="text-[.72em] text-slate-400 max-w-3xl leading-relaxed mb-10">
+            Le m&eacute;diateur intelligent d&rsquo;onboarding et de micro-learning<br>
+            con&ccedil;u pour lutter contre l&rsquo;attrition pr&eacute;coce dans le jeu vid&eacute;o.
+          </p>
+          <div class="glass px-10 py-5 flex items-center gap-10">
+            <div class="text-left">
+              <p class="font-display font-bold text-[.75em] text-white">Thomas QUERREC</p>
+              <p class="font-mono text-[.5em] text-mint tracking-widest uppercase">Sp&eacute;cialit&eacute; Tech Lead &middot; Bloc DEV</p>
+            </div>
+            <div class="h-10 w-px bg-slate-700"></div>
+            <div class="text-left">
+              <p class="font-mono text-[.5em] text-slate-400">Prototype en ligne</p>
+              <p class="font-mono text-[.55em] text-cyanx">dc-start-gghf.vercel.app</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Bonjour à toutes et à tous, et merci de m'accueillir pour cette soutenance. Je m'appelle Thomas Querrec, je suis candidat au titre de Tech Lead, avec le bloc de compétences optionnel DEV. Je suis passionné de jeux vidéo depuis plus de dix ans, et c'est précisément cette passion qui est à l'origine du projet que je vais vous présenter pendant trente minutes : GGHF, pour "Good Game, Have Fun". GGHF est un médiateur intelligent entre les jeux et les joueurs : une plateforme d'onboarding et de micro-learning qui lutte contre l'attrition précoce, c'est-à-dire l'abandon d'un jeu dans les toutes premières heures. Mon plan suit la démarche du marathon DC Start, de l'idéation jusqu'à l'activation, en six temps : comprendre le problème, explorer le terrain, positionner l'offre, construire la solution — ce sera le cœur de cette soutenance, dix minutes dédiées à l'implémentation logicielle et à l'architecture, où je valoriserai ma spécialité Tech Lead et le bloc DEV —, activer le marché, et enfin me projeter. Le prototype est en ligne à l'adresse affichée — et je vous le présenterai en démonstration live au cœur de la partie technique. Commençons par le constat qui a tout déclenché.
+        </aside>
+      </section>
+
+      <!-- ============ 2. LE CONSTAT ============ -->
+      <section>
+        <div class="pt-10">
+          <span class="chip chip-orange">01 &middot; Comprendre &middot; Le constat &middot; 3 min</span>
+          <h2 class="font-display font-extrabold text-[1.5em] text-white mt-4 mb-8">Un march&eacute; g&eacute;ant qui perd ses joueurs<br><span class="grad-text">d&egrave;s les premi&egrave;res heures</span></h2>
+          <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="glass p-7 fragment">
+              <p class="font-mono font-semibold text-[1.7em] text-coral leading-none">62<span class="text-[.5em]">%</span></p>
+              <p class="text-[.6em] text-slate-300 mt-3 leading-snug">des nouveaux joueurs abandonnent un jeu <strong class="text-white">d&egrave;s les premi&egrave;res heures</strong>, faute de compr&eacute;hension des m&eacute;caniques.</p>
+            </div>
+            <div class="glass p-7 fragment">
+              <p class="font-mono font-semibold text-[1.7em] text-mint leading-none">253,6<span class="text-[.45em]"> Mds $</span></p>
+              <p class="text-[.6em] text-slate-300 mt-3 leading-snug">de march&eacute; mondial en 2023, projet&eacute; &agrave; <strong class="text-white">924 Mds $ en 2032</strong>. L&rsquo;attrition est un probl&egrave;me &eacute;conomique massif.</p>
+            </div>
+            <div class="glass p-7 fragment">
+              <p class="font-mono font-semibold text-[1.7em] text-cyanx leading-none">38,3<span class="text-[.45em]"> M</span></p>
+              <p class="text-[.6em] text-slate-300 mt-3 leading-snug">de joueurs en France : une audience <strong class="text-white">diversifi&eacute;e</strong> qui r&eacute;clame inclusivit&eacute; et bienveillance.</p>
+            </div>
+          </div>
+          <div class="glass-strong p-5 fragment border-l-4 !border-l-coral">
+            <p class="text-[.68em] text-slate-200 leading-relaxed"><span class="font-mono text-coral text-[.8em] uppercase tracking-widest">Probl&eacute;matique &nbsp;&middot;&nbsp;</span> Comment accompagner efficacement les nouveaux joueurs pour leur offrir une exp&eacute;rience personnalis&eacute;e et engageante, tout en favorisant leur int&eacute;gration dans la communaut&eacute; ?</p>
+          </div>
+          <span class="src">62&nbsp;% : sondage GGHF aupr&egrave;s de 250 joueurs — Note d&rsquo;intention (Sprint 1) &middot; 253,6 Mds $ (2023) &amp; 924 Mds $ (2032) : Fortune Business Insights, Gaming Market Report — repris dans l&rsquo;analyse sectorielle, Cahier des charges (Sprint 3) &middot; 38,3 M de joueurs FR : SELL, L&rsquo;Essentiel du Jeu Vid&eacute;o 2023 — repris dans l&rsquo;analyse PESTEL (Sprint 3)</span>
+        </div>
+        <aside class="notes">
+          Trois chiffres posent le décor. Premier chiffre : 62 %. C'est la proportion de nouveaux joueurs qui abandonnent un jeu dès les premières heures — non pas par manque d'intérêt, mais parce que les mécaniques sont trop complexes, l'aide trop dispersée et les contenus inadaptés à leur niveau. C'est ce qu'on appelle l'attrition précoce, et c'est l'ennemi que GGHF combat. Deuxième chiffre : 253,6 milliards de dollars. C'est la taille du marché mondial du jeu vidéo en 2023, avec une projection à 924 milliards en 2032. Chaque joueur perdu dans l'onboarding est donc une perte économique directe pour les éditeurs — ce qui ouvre d'ailleurs une opportunité B2B que je détaillerai dans la partie activation. Troisième chiffre : 38,3 millions de joueurs rien qu'en France. Cette audience s'est massivement diversifiée avec le mobile et le cloud gaming : elle ne ressemble plus au stéréotype du joueur expert, et elle exprime un besoin fort d'espaces d'apprentissage bienveillants, sans toxicité ni élitisme. De là découle ma problématique, qui a guidé toute la démarche : comment accompagner efficacement les nouveaux joueurs, avec une expérience personnalisée et engageante, tout en favorisant leur intégration dans la communauté ? Voyons la vision qui y répond.
+        </aside>
+      </section>
+
+      <!-- ============ 3. LA VISION ============ -->
+      <section>
+        <div class="pt-10">
+          <span class="chip chip-orange">01 &middot; Comprendre &middot; La vision</span>
+          <h2 class="font-display font-extrabold text-[1.5em] text-white mt-4 mb-6">GGHF, le <span class="grad-text">m&eacute;diateur intelligent</span><br>entre le jeu et le joueur</h2>
+          <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="glass p-6 fragment">
+              <p class="font-mono text-[.5em] text-mint uppercase tracking-widest mb-2">01 &middot; Personnalisation</p>
+              <p class="text-[.62em] text-slate-300 leading-snug">Un <strong class="text-white">profilage par arch&eacute;types</strong> : un questionnaire intelligent analyse motivations, rapport &agrave; la difficult&eacute; et fa&ccedil;on d&rsquo;apprendre.</p>
+            </div>
+            <div class="glass p-6 fragment">
+              <p class="font-mono text-[.5em] text-cyanx uppercase tracking-widest mb-2">02 &middot; Micro-learning</p>
+              <p class="text-[.62em] text-slate-300 leading-snug">Des parcours d&eacute;coup&eacute;s en <strong class="text-white">&eacute;tapes courtes et valid&eacute;es</strong>, pour progresser sans surcharge cognitive.</p>
+            </div>
+            <div class="glass p-6 fragment">
+              <p class="font-mono text-[.5em] text-coral uppercase tracking-widest mb-2">03 &middot; Safe Space</p>
+              <p class="text-[.62em] text-slate-300 leading-snug">Un hub communautaire <strong class="text-white">bienveillant et mod&eacute;r&eacute;</strong>, qui prot&egrave;ge le d&eacute;butant de la toxicit&eacute; et du jugement.</p>
+            </div>
+          </div>
+          <div class="glass-strong p-6 text-center fragment">
+            <p class="font-display font-bold text-[.85em] text-white">&laquo; Ne jouez plus par d&eacute;pit, <span class="text-mint">progressez par plaisir</span>. &raquo;</p>
+            <p class="font-mono text-[.5em] text-slate-500 mt-2 uppercase tracking-widest">Promesse de marque GGHF</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Face à ce constat, la vision de GGHF tient en une expression : être un médiateur intelligent entre les mécaniques complexes des jeux et le plaisir du joueur. Cette vision repose sur trois piliers. Premier pilier, la personnalisation : au lieu de proposer les mêmes tutoriels génériques à tout le monde, GGHF commence par profiler le joueur. Un questionnaire interactif analyse ses motivations — détente, progression ou compétition —, son rapport à la difficulté et sa façon d'apprendre, puis lui attribue un archétype de joueur qui conditionne toutes les recommandations. Deuxième pilier, le micro-learning : la cause numéro un de l'abandon, c'est la courbe d'apprentissage trop abrupte. Nous découpons donc chaque guide en étapes courtes, visuelles, avec une validation explicite et une barre de progression — le joueur voit qu'il avance, session après session. Troisième pilier, le Safe Space : les débutants fuient les communautés toxiques et élitistes. GGHF garantit nativement un environnement bienveillant, avec mentorat entre joueurs de niveau équivalent. Tout cela se condense dans notre promesse de marque : "Ne jouez plus par dépit, progressez par plaisir". Plutôt qu'un long discours, je vous propose maintenant de découvrir GGHF comme le découvriraient nos utilisateurs : à travers notre vidéo explainer d'une minute.
+        </aside>
+      </section>
+
+      <!-- ============ 3bis. EXPLAINER VIDÉO ============ -->
+      <section>
+        <div class="pt-8">
+          <div class="flex items-center justify-between mb-3">
+            <span class="chip chip-orange">01 &middot; Comprendre &middot; Explainer vid&eacute;o &middot; 60 s</span>
+            <span class="font-mono text-[.42em] text-slate-500">GGHFExplainer.mp4 &middot; message bref &amp; storytelling</span>
+          </div>
+          <h2 class="font-display font-extrabold text-[1.2em] text-white mb-4">GGHF en <span class="grad-text">une minute</span></h2>
+          <div class="glass p-3 flex justify-center">
+            <iframe
+              src="https://drive.google.com/file/d/1aDschhCo0YjyFgwfKYEcJRObpKd772ie/preview"
+              width="880" height="495"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+              class="rounded-xl border-0 bg-ink"
+              title="Vid&eacute;o explainer GGHF"></iframe>
+          </div>
+          <span class="src">Vid&eacute;o explainer GGHF — livrable communication cr&eacute;ative (dossier explainer) &middot; lecture de secours : drive.google.com/file/d/1aDschhCo0YjyFgwfKYEcJRObpKd772ie/view</span>
+        </div>
+        <aside class="notes">
+          Je lance maintenant la vidéo explainer — une minute. Avant de cliquer, une phrase de contexte : cette vidéo est notre premier outil de communication créative ; elle condense la promesse de GGHF dans le format court et percutant qu'attendent nos cibles, avec un storytelling simple — la frustration du joueur perdu, la révélation de son archétype, le plaisir retrouvé. C'est exactement le dispositif évalué dans la stratégie de communication : un message bref, compréhensible immédiatement par la cible, et décliné ensuite sur tous nos canaux, du TikTok d'Alex aux carrousels de Camille. [Lancer la vidéo — 60 secondes.] [Après la vidéo :] Voilà GGHF en une minute. Vous avez vu la mécanique narrative : on ne vend pas une base de données de guides, on vend une transformation — du rage quit à la progression par plaisir. Voyons maintenant comment cette vision s'est construite méthodiquement, étape par étape, en commençant par l'idéation et la recherche. Point technique de secours : si la vidéo ne se lance pas dans le support, elle est accessible directement via le lien affiché en bas de la diapositive, et une copie locale est prête sur le bureau.
+        </aside>
+      </section>
+
+      <!-- ============ 4. SPRINT 1 — RECHERCHE SECTORIELLE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip">02 &middot; Explorer &middot; Id&eacute;ation &amp; cadrage &middot; 4 min</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-5">Recherche sectorielle : <span class="grad-text">PESTEL &amp; SWOT</span></h2>
+          <div class="grid grid-cols-6 gap-3 mb-5">
+            <div class="glass p-3 fragment"><p class="font-mono text-[.45em] text-mint uppercase tracking-wider mb-1">Politique</p><p class="text-[.5em] text-slate-300 leading-snug">Soutien institutionnel, statut JEI potentiel</p></div>
+            <div class="glass p-3 fragment"><p class="font-mono text-[.45em] text-mint uppercase tracking-wider mb-1">&Eacute;conomique</p><p class="text-[.5em] text-slate-300 leading-snug">+10&nbsp;% en France en 2023, essor du GaaS</p></div>
+            <div class="glass p-3 fragment"><p class="font-mono text-[.45em] text-mint uppercase tracking-wider mb-1">Socioculturel</p><p class="text-[.5em] text-slate-300 leading-snug">Audience diversifi&eacute;e, besoin de Safe Space</p></div>
+            <div class="glass p-3 fragment"><p class="font-mono text-[.45em] text-mint uppercase tracking-wider mb-1">Technologique</p><p class="text-[.5em] text-slate-300 leading-snug">IA, cloud gaming, UX adaptative</p></div>
+            <div class="glass p-3 fragment"><p class="font-mono text-[.45em] text-mint uppercase tracking-wider mb-1">Environnemental</p><p class="text-[.5em] text-slate-300 leading-snug">&Eacute;co-conception, sobri&eacute;t&eacute; serveur</p></div>
+            <div class="glass p-3 fragment"><p class="font-mono text-[.45em] text-mint uppercase tracking-wider mb-1">L&eacute;gal</p><p class="text-[.5em] text-slate-300 leading-snug">RGPD, donn&eacute;es de profilage, mineurs</p></div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="glass p-4 fragment border-l-4 !border-l-mint">
+              <p class="font-mono text-[.48em] text-mint uppercase tracking-widest mb-1">Forces &amp; Opportunit&eacute;s</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Positionnement unique sur la personnalisation &middot; multi-support &middot; besoin valid&eacute; terrain &middot; march&eacute; vers <strong class="text-white">924 Mds $ (2032)</strong> &middot; demande de m&eacute;diation p&eacute;dagogique et d&rsquo;espaces non toxiques.</p>
+            </div>
+            <div class="glass p-4 fragment border-l-4 !border-l-coral">
+              <p class="font-mono text-[.48em] text-coral uppercase tracking-widest mb-1">Faiblesses &amp; Menaces</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Notori&eacute;t&eacute; initiale nulle &middot; d&eacute;pendance au volume de contenu &middot; concurrence indirecte massive (YouTube, Discord) &middot; exigences UX &eacute;lev&eacute;es &middot; &eacute;volutions technologiques rapides.</p>
+            </div>
+          </div>
+          <span class="src">Analyses PESTEL &amp; SWOT : rapport de recherche sectorielle (Sprint 1), consolid&eacute;es dans le Cahier des charges §1.4 (Sprint 3) &middot; +10&nbsp;% France 2023 &amp; 38,3 M de joueurs : SELL, L&rsquo;Essentiel du Jeu Vid&eacute;o 2023 &middot; 924 Mds $ (2032) : Fortune Business Insights, Gaming Market Report</span>
+        </div>
+        <aside class="notes">
+          La première phase du projet a été consacrée à l'idéation et au cadrage, en commençant par une recherche sectorielle rigoureuse. L'analyse PESTEL m'a permis de cartographier l'écosystème. Sur le plan politique, le jeu vidéo est désormais reconnu comme secteur culturel, avec un soutien institutionnel fort et une éligibilité potentielle au statut de Jeune Entreprise Innovante — un point que je réutilise dans le plan de financement. Sur le plan économique, le marché français a progressé de dix pour cent en 2023, porté par le jeu-service et les abonnements, qui amènent en continu de nouveaux joueurs à intégrer. Le facteur socioculturel est central pour nous : l'audience s'est diversifiée et exprime un besoin d'inclusion. Côté technologique, l'IA et les algorithmes de classification rendent enfin la personnalisation scalable — c'est le cœur technique de GGHF. Enfin, l'environnemental m'engage à l'éco-conception, et le légal impose le RGPD dès la conception, puisque nous manipulons des données comportementales. La synthèse SWOT croise ces éléments : nos forces sont un positionnement unique sur la personnalisation et un besoin validé par le terrain ; nos faiblesses, une notoriété à construire et une dépendance au contenu ; l'opportunité, un marché en croissance vers 924 milliards ; la menace, la concurrence indirecte de YouTube et Discord. Cette analyse théorique devait être confrontée au terrain : c'est l'objet de l'étude qualitative.
+        </aside>
+      </section>
+
+      <!-- ============ 5. SPRINT 1 — ÉTUDE QUALITATIVE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip">02 &middot; Explorer &middot; &Eacute;tude qualitative</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-5">Une demande r&eacute;elle, <span class="grad-text">quantifi&eacute;e sur 250 joueurs</span></h2>
+          <div class="glass p-6 mb-5">
+            <div class="space-y-4">
+              <div class="fragment">
+                <div class="flex justify-between items-baseline mb-1">
+                  <span class="text-[.58em] text-slate-300">Abandonnent dans les premi&egrave;res heures, faute de comprendre les m&eacute;canismes</span>
+                  <span class="font-mono font-semibold text-[.75em] text-coral">62&nbsp;%</span>
+                </div>
+                <div class="h-2.5 rounded-full bg-slate-800"><div class="h-2.5 rounded-full bg-coral" style="width:62%"></div></div>
+              </div>
+              <div class="fragment">
+                <div class="flex justify-between items-baseline mb-1">
+                  <span class="text-[.58em] text-slate-300">Souhaitent des outils pour d&eacute;couvrir plus vite leur style de jeu</span>
+                  <span class="font-mono font-semibold text-[.75em] text-cyanx">75&nbsp;%</span>
+                </div>
+                <div class="h-2.5 rounded-full bg-slate-800"><div class="h-2.5 rounded-full bg-cyanx" style="width:75%"></div></div>
+              </div>
+              <div class="fragment">
+                <div class="flex justify-between items-baseline mb-1">
+                  <span class="text-[.58em] text-slate-300">Pensent qu&rsquo;une orientation personnalis&eacute;e am&eacute;liorerait la fid&eacute;lit&eacute; des nouveaux joueurs</span>
+                  <span class="font-mono font-semibold text-[.75em] text-mint">85&nbsp;%</span>
+                </div>
+                <div class="h-2.5 rounded-full bg-slate-800"><div class="h-2.5 rounded-full bg-mint" style="width:85%"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4 fragment">
+            <div class="glass p-4"><p class="text-[.55em] text-slate-300 italic leading-snug">&laquo; Quand j&rsquo;ai commenc&eacute;, je ne savais pas quel personnage choisir et j&rsquo;ai fini par quitter le jeu, frustr&eacute;. &raquo;</p></div>
+            <div class="glass p-4"><p class="text-[.55em] text-slate-300 italic leading-snug">&laquo; Un guide adapt&eacute; &agrave; mon style de jeu aurait vraiment fait la diff&eacute;rence. &raquo;</p></div>
+          </div>
+          <span class="src">Sondage en ligne GGHF men&eacute; aupr&egrave;s de 250 joueurs, amateurs et professionnels — Note d&rsquo;intention §3 (Sprint 1) &middot; Verbatims : entretiens utilisateurs de premi&egrave;re main (&eacute;tude qualitative, Sprint 1)</span>
+        </div>
+        <aside class="notes">
+          Pour objectiver le besoin, j'ai mené un sondage auprès de 250 joueurs, amateurs comme confirmés, complété par des entretiens de première main avec des débutants et des créateurs de contenu pédagogique. Trois résultats structurent tout le projet. Soixante-deux pour cent des nouveaux joueurs déclarent avoir abandonné un jeu dans les premières heures, faute d'en comprendre les mécanismes — c'est le chiffre d'attrition que vous avez vu en introduction, et il vient directement de ce terrain. Soixante-quinze pour cent souhaiteraient des outils pour découvrir plus rapidement leur style de jeu : c'est la validation directe du moteur de profilage par archétypes. Et quatre-vingt-cinq pour cent des joueurs réguliers estiment qu'une orientation claire et personnalisée dès le départ améliorerait la fidélité des nouveaux venus : le besoin est donc reconnu même par les joueurs expérimentés. Précision méthodologique si le jury le demande : ces trois pourcentages proviennent de notre propre sondage mené en phase d'idéation — j'assume qu'il s'agit d'une étude déclarative sur panel, c'est pourquoi l'objectif SMART parle bien de taux d'abandon "déclaré" ; les données de marché, elles, sont issues de l'analyse sectorielle consolidée dans le cahier des charges. Les sources sont rappelées en bas de chaque diapositive chiffrée. Les verbatims sont éloquents — je vous en cite deux : "Quand j'ai commencé, je ne savais pas quel personnage choisir et j'ai fini par quitter le jeu, frustré", et "Un guide adapté à mon style de jeu aurait vraiment fait la différence". Les entretiens ont aussi fait remonter deux irritants récurrents : la toxicité des communautés et la difficulté d'accès aux guides existants. Pour transformer ces données en décisions produit, je les ai incarnées dans deux personas de référence.
+        </aside>
+      </section>
+
+      <!-- ============ 6. SPRINT 1 — PERSONAS ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip">02 &middot; Explorer &middot; Mod&eacute;lisation des personas</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-5">Deux personas, <span class="grad-text">deux rapports au jeu</span></h2>
+          <div class="grid grid-cols-2 gap-6">
+
+            <div class="glass p-5 fragment">
+              <div class="flex items-center gap-4 mb-3">
+                <svg viewBox="0 0 64 64" class="w-16 h-16 flex-shrink-0">
+                  <rect x="2" y="2" width="60" height="60" rx="14" fill="#F97316"/>
+                  <circle cx="32" cy="23" r="10" fill="none" stroke="#0B0F19" stroke-width="4"/>
+                  <path d="M14 54 Q14 38 32 38 Q50 38 50 54" fill="none" stroke="#0B0F19" stroke-width="4" stroke-linecap="round"/>
+                  <circle cx="28" cy="22" r="1.8" fill="#0B0F19"/><circle cx="36" cy="22" r="1.8" fill="#0B0F19"/>
+                  <path d="M28 27 Q32 30 36 27" fill="none" stroke="#0B0F19" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <p class="font-display font-bold text-[.75em] text-white leading-tight">Alex &middot; 18 ans</p>
+                  <p class="font-mono text-[.45em] text-cyanx uppercase tracking-widest">Le D&eacute;butant Curieux</p>
+                  <p class="text-[.45em] mt-1"><span class="bg-cyanx/15 text-slate-200 px-1.5 py-0.5 rounded">&Eacute;tudiant &middot; budget limit&eacute; &middot; contenu rapide TikTok / mobile</span></p>
+                </div>
+              </div>
+              <div class="mb-3 space-y-1.5">
+                <p class="font-mono text-[.42em] text-cyanx uppercase tracking-widest">Personnalit&eacute;</p>
+                <p class="text-[.52em] text-slate-300 leading-snug">Profil <strong class="text-white">analytique et organis&eacute;</strong>, orient&eacute; jeu d&rsquo;&eacute;quipe : il compare les builds chiffr&eacute;s et privil&eacute;gie le <strong class="text-white">risque mesur&eacute;</strong> au pari hasardeux.</p>
+                <p class="text-[.52em] text-slate-300 leading-snug">Emploi du temps charg&eacute; : <strong class="text-white">visites courtes mais tr&egrave;s fr&eacute;quentes</strong>, essentiellement sur mobile, en lecture rapide.</p>
+              </div>
+              <div class="border-t border-slate-700/60 pt-2.5 space-y-1.5">
+                <p class="text-[.5em] text-slate-300 leading-snug"><span class="text-coral font-semibold">&#10007;</span> Guides longs, obsol&egrave;tes, recommandations g&eacute;n&eacute;riques.</p>
+                <p class="text-[.5em] text-slate-300 leading-snug"><span class="text-mint font-semibold">&#10003;</span> Micro-learning cibl&eacute;, builds &laquo; m&eacute;ta &raquo;, z&eacute;ro perte de temps.</p>
+              </div>
+            </div>
+
+            <div class="glass p-5 fragment">
+              <div class="flex items-center gap-4 mb-3">
+                <svg viewBox="0 0 64 64" class="w-16 h-16 flex-shrink-0">
+                  <rect x="2" y="2" width="60" height="60" rx="14" fill="#34D399"/>
+                  <circle cx="32" cy="23" r="10" fill="none" stroke="#0B0F19" stroke-width="4"/>
+                  <path d="M14 54 Q14 38 32 38 Q50 38 50 54" fill="none" stroke="#0B0F19" stroke-width="4" stroke-linecap="round"/>
+                  <circle cx="28" cy="22" r="1.8" fill="#0B0F19"/><circle cx="36" cy="22" r="1.8" fill="#0B0F19"/>
+                  <path d="M28 27 Q32 30 36 27" fill="none" stroke="#0B0F19" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M20 14 Q26 8 32 13 Q38 8 44 14" fill="none" stroke="#0B0F19" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <p class="font-display font-bold text-[.75em] text-white leading-tight">Camille &middot; 27 ans</p>
+                  <p class="font-mono text-[.45em] text-coral uppercase tracking-widest">La Joueuse &laquo; D&eacute;tente &raquo;</p>
+                  <p class="text-[.45em] mt-1"><span class="bg-coral/15 text-slate-200 px-1.5 py-0.5 rounded">Charg&eacute;e de comm &middot; CSP+ &middot; joue pour s&rsquo;immerger, sans pression</span></p>
+                </div>
+              </div>
+              <div class="mb-3 space-y-1.5">
+                <p class="font-mono text-[.42em] text-coral uppercase tracking-widest">Personnalit&eacute;</p>
+                <p class="text-[.52em] text-slate-300 leading-snug"><strong class="text-white">Extravertie et cr&eacute;ative</strong> : elle recherche l&rsquo;immersion, la narration et le partage d&rsquo;exp&eacute;rience, loin de la pression comp&eacute;titive.</p>
+                <p class="text-[.52em] text-slate-300 leading-snug">Temps libre investi dans des <strong class="text-white">sessions longues et pos&eacute;es</strong>, moins fr&eacute;quentes, avec une forte interaction communautaire.</p>
+              </div>
+              <div class="border-t border-slate-700/60 pt-2.5 space-y-1.5">
+                <p class="text-[.5em] text-slate-300 leading-snug"><span class="text-coral font-semibold">&#10007;</span> &Eacute;litisme, jargon technique, toxicit&eacute; des communaut&eacute;s.</p>
+                <p class="text-[.5em] text-slate-300 leading-snug"><span class="text-mint font-semibold">&#10003;</span> Safe Space narratif, rythme libre, partage communautaire valoris&eacute;.</p>
+              </div>
+            </div>
+
+          </div>
+          <span class="src">Fiches personas (profils, traits de personnalit&eacute;, frustrations / attentes) : boards personas — dossier ressources du Drive &amp; Note d&rsquo;intention (Sprint 1), enrichis par la Strat&eacute;gie marketing §2.3 (Sprint 4)</span>
+        </div>
+        <aside class="notes">
+          Voici les deux personas qui ont servi de boussole à toutes mes décisions — produit, techniques et marketing. À gauche, Alex, dix-huit ans, le Débutant Curieux. C'est un étudiant au budget limité, joueur mobile et PC, au rythme quotidien chargé : il fait des visites courtes mais très fréquentes. Il veut de l'efficacité immédiate : des guides ultra-ciblés, à jour, qui lui permettent de franchir des paliers compétitifs sans perdre de temps. Il rejette massivement les guides trop longs, mal structurés ou génériques. Ce qu'il attend de GGHF, c'est une personnalisation algorithmique stricte, servie dans des formats de micro-learning courts. À droite, Camille, vingt-sept ans, la Joueuse Détente. Chargée de communication avec un pouvoir d'achat plus élevé, elle joue pour s'immerger et se détendre après le travail. Elle souffre de surcharge cognitive face aux jeux complexes et rejette l'élitisme, le jargon et la toxicité. Ce qu'elle attend de GGHF, c'est un environnement sain, des recommandations variées et narratives, et la valorisation des contributions communautaires. Retenez cette dualité : Alex cherche la performance rapide, Camille cherche la sérénité profonde. Vous verrez qu'elle structure toute la suite : la proposition de valeur, les choix d'architecture — rendu SSR pour le référencement versus interactivité du dashboard — et la stratégie d'acquisition. Passons justement à l'exploration du marché.
+        </aside>
+      </section>
+
+      <!-- ============ 7. SPRINT 2 — BENCHMARK ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-cyan">03 &middot; Se positionner &middot; Exploration &amp; proposition de valeur &middot; 4 min</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Benchmark : <span class="grad-text">un march&eacute; polaris&eacute;</span></h2>
+          <div class="glass p-5 mb-4">
+            <table class="bench">
+              <thead>
+                <tr><th>Acteur</th><th>Mod&egrave;le</th><th>Force</th><th>Limite</th></tr>
+              </thead>
+              <tbody>
+                <tr class="fragment"><td class="font-semibold text-white">YouTube / Twitch</td><td>Vid&eacute;o gratuite de masse</td><td>Accessibilit&eacute; totale, exhaustivit&eacute;</td><td class="text-coral">G&eacute;n&eacute;rique, passif, aucun parcours guid&eacute;</td></tr>
+                <tr class="fragment"><td class="font-semibold text-white">GameFAQs / Wikis</td><td>Guides &eacute;crits gratuits</td><td>Compl&eacute;tude encyclop&eacute;dique</td><td class="text-coral">R&eacute;barbatif, z&eacute;ro personnalisation</td></tr>
+                <tr class="fragment"><td class="font-semibold text-white">GamerSensei / Metafy</td><td>Coaching humain payant</td><td>Personnalisation maximale</td><td class="text-coral">Co&ucirc;t prohibitif, intimidant pour le d&eacute;butant</td></tr>
+                <tr class="fragment"><td class="font-semibold text-white">Discord / Forums</td><td>Entraide communautaire</td><td>R&eacute;activit&eacute;, appartenance</td><td class="text-coral">Toxicit&eacute;, gatekeeping, d&eacute;sordre</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="glass-strong p-4 fragment border-l-4 !border-l-mint">
+            <p class="text-[.6em] text-slate-200 leading-snug"><span class="font-mono text-mint text-[.8em] uppercase tracking-widest">Key learning &middot;</span> Personne ne combine <strong class="text-white">accessibilit&eacute; gratuite</strong> et <strong class="text-white">personnalisation r&eacute;elle</strong> : l&rsquo;espace est vacant.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Deuxième temps fort de la démarche : l'exploration concurrentielle et la formalisation de la proposition de valeur. Le benchmark révèle un marché de l'accompagnement polarisé entre deux extrêmes. D'un côté, les plateformes de diffusion de masse. YouTube et Twitch offrent une accessibilité totale et un volume de contenu éducatif énorme, mais le message implicite est "tout est là, débrouille-toi" : c'est générique, passif, sans aucune structure guidée pour un débutant. GameFAQs et les wikis sont exhaustifs, mais rébarbatifs, purement textuels et sans onboarding. De l'autre côté, le coaching humain payant, comme GamerSensei ou Metafy : la personnalisation est maximale, mais le coût est prohibitif et la posture élitiste est intimidante pour un débutant qui craint justement le jugement. Entre les deux, Discord et les forums offrent réactivité et sentiment d'appartenance, mais avec une image de toxicité et de gatekeeping qui fait fuir exactement les profils que nous ciblons. Le key learning est limpide : aucun acteur ne combine l'accessibilité du gratuit et une personnalisation réelle. Chaque concurrent m'a d'ailleurs appris quelque chose : de YouTube je retiens la puissance du référencement, de GamerSensei la valorisation de l'expertise, de Discord la force communautaire — en rejetant à chaque fois leur faiblesse. Le mapping suivant visualise cet espace vacant.
+        </aside>
+      </section>
+
+      <!-- ============ 8. SPRINT 2 — MAPPING ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-cyan">03 &middot; Se positionner &middot; Mapping de positionnement</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">L&rsquo;espace vacant : <span class="grad-text">accessible ET personnalis&eacute;</span></h2>
+          <div class="glass p-5 flex justify-center">
+            <svg viewBox="0 0 860 380" class="w-full max-w-4xl" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+              <defs>
+                <radialGradient id="ggGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#34D399" stop-opacity=".45"/>
+                  <stop offset="100%" stop-color="#34D399" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <line x1="80" y1="330" x2="820" y2="330" stroke="#334155" stroke-width="2"/>
+              <line x1="80" y1="330" x2="80" y2="30" stroke="#334155" stroke-width="2"/>
+              <text x="820" y="355" fill="#64748B" font-size="14" text-anchor="end">Accessibilit&eacute; / Co&ucirc;t faible &rarr;</text>
+              <text x="60" y="40" fill="#64748B" font-size="14" transform="rotate(-90 60 40)" text-anchor="end">Personnalisation &rarr;</text>
+              <line x1="450" y1="330" x2="450" y2="30" stroke="#1E293B" stroke-width="1" stroke-dasharray="6 6"/>
+              <line x1="80" y1="180" x2="820" y2="180" stroke="#1E293B" stroke-width="1" stroke-dasharray="6 6"/>
+
+              <circle cx="640" cy="272" r="11" fill="#0EA5E9" opacity=".85"/>
+              <text x="640" y="300" fill="#94A3B8" font-size="14" text-anchor="middle">YouTube</text>
+              <circle cx="740" cy="296" r="11" fill="#0EA5E9" opacity=".6"/>
+              <text x="740" y="324" fill="#94A3B8" font-size="14" text-anchor="middle">GameFAQs</text>
+              <circle cx="180" cy="80" r="11" fill="#F97316" opacity=".85"/>
+              <text x="180" y="60" fill="#94A3B8" font-size="14" text-anchor="middle">GamerSensei</text>
+              <circle cx="520" cy="240" r="11" fill="#0EA5E9" opacity=".45"/>
+              <text x="520" y="222" fill="#94A3B8" font-size="14" text-anchor="middle">Discord</text>
+
+              <circle cx="700" cy="85" r="70" fill="url(#ggGlow)"/>
+              <circle cx="700" cy="85" r="16" fill="#34D399"/>
+              <text x="700" y="120" fill="#34D399" font-size="17" font-weight="600" text-anchor="middle">GGHF</text>
+              <rect x="560" y="38" width="285" height="110" rx="14" fill="none" stroke="#34D399" stroke-opacity=".35" stroke-dasharray="7 7"/>
+              <text x="702" y="155" fill="#64748B" font-size="12" text-anchor="middle">Espace vacant captur&eacute;</text>
+            </svg>
+          </div>
+        </div>
+        <aside class="notes">
+          Ce mapping croise les deux dimensions discriminantes du marché : en abscisse, l'accessibilité — c'est-à-dire le coût et la facilité d'accès —, en ordonnée, le niveau de personnalisation. La lecture est immédiate. En bas à droite, YouTube et GameFAQs : très accessibles, gratuits, mais quasiment aucune personnalisation — le contenu est identique pour tous. En haut à gauche, GamerSensei : personnalisation maximale grâce au coach humain, mais une accessibilité écrasée par le prix. Discord flotte au milieu, sans structure pédagogique. Le quadrant supérieur droit — accessibilité forte ET personnalisation forte — est vide. C'est précisément là que GGHF se positionne, et c'est possible pour une raison technologique : la personnalisation algorithmique. Contrairement au coach humain, un moteur de recommandation basé sur des archétypes a un coût marginal quasi nul par utilisateur supplémentaire : la personnalisation devient scalable, donc compatible avec un modèle freemium accessible. C'est l'intuition fondatrice du projet, et c'est elle qui justifiera l'investissement technique dans le moteur de scoring — le cœur de la valeur. Avant cela, il fallait valider formellement l'adéquation entre ce positionnement et les besoins des personas : c'est le rôle du Value Proposition Canvas.
+        </aside>
+      </section>
+
+      <!-- ============ 9. SPRINT 2 — VPC ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-cyan">03 &middot; Se positionner &middot; Value Proposition Canvas</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">L&rsquo;ajustement <span class="grad-text">probl&egrave;me / solution</span></h2>
+          <div class="grid grid-cols-2 gap-5">
+            <div class="glass p-5">
+              <p class="font-mono text-[.5em] text-coral uppercase tracking-widest mb-3">Profil client &middot; Pains &amp; Gains</p>
+              <ul class="text-[.55em] text-slate-300 space-y-2 leading-snug">
+                <li class="fragment">&#10007; Difficult&eacute; &agrave; identifier un contenu adapt&eacute; &agrave; son profil.</li>
+                <li class="fragment">&#10007; Tutoriels g&eacute;n&eacute;riques, peu engageants, trop complexes.</li>
+                <li class="fragment">&#10007; Frustration d&rsquo;une courbe d&rsquo;apprentissage trop abrupte.</li>
+                <li class="fragment">&#10003; <span class="text-slate-200">Gains attendus :</span> d&eacute;couverte rapide, progression engageante, plaisir d&egrave;s les premi&egrave;res sessions.</li>
+              </ul>
+            </div>
+            <div class="glass p-5 border !border-mint/30">
+              <p class="font-mono text-[.5em] text-mint uppercase tracking-widest mb-3">Carte de valeur GGHF</p>
+              <ul class="text-[.55em] text-slate-300 space-y-2 leading-snug">
+                <li class="fragment">&#9670; <span class="text-white font-semibold">Moteur de profilage</span> : quiz + algorithme de scoring &rarr; arch&eacute;type.</li>
+                <li class="fragment">&#9670; <span class="text-white font-semibold">Recommandations &laquo; Best Match &raquo;</span> filtr&eacute;es par profil.</li>
+                <li class="fragment">&#9670; <span class="text-white font-semibold">Parcours gamifi&eacute;s</span> : micro-learning, feedbacks, r&eacute;compenses.</li>
+                <li class="fragment">&#9670; <span class="text-white font-semibold">Hub communautaire</span> mod&eacute;r&eacute;, mentorat par affinit&eacute;.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="glass-strong p-4 mt-4 fragment text-center">
+            <p class="text-[.6em] text-slate-200">Trois piliers valid&eacute;s : <span class="text-mint font-semibold">Personnalisation</span> &middot; <span class="text-cyanx font-semibold">Accessibilit&eacute;</span> &middot; <span class="text-coral font-semibold">Motivation</span></p>
+          </div>
+        </div>
+        <aside class="notes">
+          Le Value Proposition Canvas formalise l'ajustement entre le profil de nos clients et notre carte de valeur. À gauche, le profil client, issu directement de l'étude qualitative. Les jobs à accomplir : être guidé dans un univers vidéoludique vaste et déroutant, découvrir des jeux qui correspondent à ses préférences, disposer d'un parcours d'apprentissage structuré et gratifiant. Les douleurs : difficulté à identifier un contenu adapté à son profil, tutoriels génériques et peu engageants, frustration d'une courbe d'apprentissage trop abrupte, temps perdu à chercher. Les gains recherchés : une découverte rapide, une montée en compétence progressive, et surtout un sentiment de plaisir dès les premières sessions. À droite, la carte de valeur GGHF répond point par point. Le moteur de profilage — quiz plus algorithme de scoring — élimine la recherche à l'aveugle en attribuant un archétype. Les recommandations "Best Match" filtrent le catalogue selon ce profil : fini le contenu générique. Les parcours gamifiés en micro-learning, avec feedbacks réguliers et récompenses, adoucissent la courbe d'apprentissage et entretiennent la motivation. Et le hub communautaire modéré, avec mentorat par affinité, répond à la peur du jugement. La synthèse stratégique tient en trois piliers : personnalisation, accessibilité, motivation. Ce canevas validé, restait à le transformer en logiciel réel. Nous entrons maintenant dans le cœur technique de cette soutenance : la construction de la solution.
+        </aside>
+      </section>
+
+      <!-- ============ 10. SPRINT 3 — CADRAGE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; C&oelig;ur Tech &middot; 10 min</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Cahier des charges : <span class="grad-text">objectifs SMART &amp; fonctionnalit&eacute;s</span></h2>
+          <div class="glass p-4 mb-4">
+            <div class="grid grid-cols-3 gap-3 text-center">
+              <div><p class="font-mono font-semibold text-[.9em] text-coral">-15&nbsp;%</p><p class="text-[.48em] text-slate-400 leading-tight">de taux d&rsquo;abandon d&eacute;clar&eacute; — mesure sur panel de 30 b&ecirc;ta-testeurs</p></div>
+              <div><p class="font-mono font-semibold text-[.9em] text-mint">&gt;&nbsp;90/100</p><p class="text-[.48em] text-slate-400 leading-tight">score Lighthouse (performance technique)</p></div>
+              <div><p class="font-mono font-semibold text-[.9em] text-cyanx">10 sem.</p><p class="text-[.48em] text-slate-400 leading-tight">MVP sur 3 genres : MOBA, FPS, RPG</p></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="glass p-4 fragment">
+              <p class="font-mono text-[.48em] text-mint uppercase tracking-widest mb-1">A &middot; Moteur de profilage</p>
+              <p class="text-[.53em] text-slate-300 leading-snug">Questionnaire 10 questions &rarr; scoring temps r&eacute;el des vecteurs Technicit&eacute; / Social / Temps &rarr; arch&eacute;type.</p>
+            </div>
+            <div class="glass p-4 fragment">
+              <p class="font-mono text-[.48em] text-cyanx uppercase tracking-widest mb-1">B &middot; Recommandation pr&eacute;dictive</p>
+              <p class="text-[.53em] text-slate-300 leading-snug">Filtrage du catalogue par UUID d&rsquo;arch&eacute;type &rarr; affichage prioritaire des guides &laquo; Best Match &raquo;.</p>
+            </div>
+            <div class="glass p-4 fragment">
+              <p class="font-mono text-[.48em] text-coral uppercase tracking-widest mb-1">C &middot; Micro-learning interactif</p>
+              <p class="text-[.53em] text-slate-300 leading-snug">Guides d&eacute;coup&eacute;s en &eacute;tapes valid&eacute;es (&laquo; J&rsquo;ai compris &raquo;) + barre de progression globale.</p>
+            </div>
+            <div class="glass p-4 fragment">
+              <p class="font-mono text-[.48em] text-slate-400 uppercase tracking-widest mb-1">D &middot; Hub communautaire</p>
+              <p class="text-[.53em] text-slate-300 leading-snug">Groupes par niveau et arch&eacute;type, syst&egrave;me de mentorat, mod&eacute;ration &laquo; Safe Space &raquo;.</p>
+            </div>
+          </div>
+          <span class="src">Objectifs &minus;15&nbsp;% d&rsquo;abandon, Lighthouse &gt;&nbsp;90/100, MVP 10 semaines : objectifs SMART — Cahier des charges §1.2 (Sprint 3) &middot; Fonctionnalit&eacute;s A&ndash;D : Cahier des charges §2.2 &laquo; Fonctionnalit&eacute;s cl&eacute;s et userflows &raquo;</span>
+        </div>
+        <aside class="notes">
+          Nous voici dans le cœur de ma spécialité Tech Lead — j'y consacrerai dix minutes. Tout part d'un cahier des charges avec des objectifs SMART. Spécifique : concevoir une plateforme capable de profiler un utilisateur via un algorithme de scoring et de lui recommander des parcours adaptés. Mesurable, avec deux indicateurs chiffrés : réduire de quinze pour cent le taux d'abandon déclaré sur notre panel de testeurs, et garantir un score Lighthouse supérieur à quatre-vingt-dix — la performance technique est un engagement produit, pas un luxe. Atteignable et réaliste : le MVP est volontairement limité à trois genres majeurs — MOBA, FPS, RPG — pour valider la pertinence du moteur avant d'élargir. Temporel : dix semaines de réalisation. Fonctionnellement, la solution se décompose en quatre briques, chacune répondant à une frustration identifiée chez les personas. La brique A, le moteur de profilage : dix questions sur les motivations, un calcul de scoring en temps réel sur trois vecteurs — technicité, social, temps disponible — et un archétype restitué immédiatement. La brique B, la recommandation prédictive : le catalogue est filtré par l'archétype pour afficher en priorité les guides "Best Match" — le gain de temps qu'attend Camille. La brique C, le micro-learning : chaque guide est découpé en étapes courtes avec validation explicite — la réponse à la courbe d'apprentissage abrupte. La brique D, le hub communautaire bienveillant avec mentorat. Ces quatre briques ne sont pas un concept sur papier : elles sont en ligne. Je vous propose de les voir fonctionner en direct.
+        </aside>
+      </section>
+
+      <!-- ============ 10bis. DÉMO LIVE DU PROTOTYPE ============ -->
+      <section>
+        <div class="pt-8">
+          <div class="flex items-center justify-between mb-3">
+            <span class="chip chip-orange">04 &middot; Construire &middot; D&eacute;mo live &middot; ~2 min</span>
+            <a href="https://dc-start-gghf.vercel.app" target="_blank" rel="noopener"
+               class="font-mono text-[.5em] font-semibold text-ink bg-coral hover:bg-orange-400 transition-colors px-4 py-2 rounded-lg">
+              Ouvrir la d&eacute;mo en plein &eacute;cran &nearr;
+            </a>
+          </div>
+          <h2 class="font-display font-extrabold text-[1.2em] text-white mb-4">Le prototype <span class="grad-text">en direct</span></h2>
+          <div class="flex gap-4 items-stretch">
+            <div class="glass p-2 flex-1">
+              <iframe data-src="https://dc-start-gghf.vercel.app"
+                      class="w-full h-[430px] rounded-xl border-0 bg-ink"
+                      title="Prototype GGHF — dc-start-gghf.vercel.app"></iframe>
+            </div>
+            <div class="w-[30%] flex-shrink-0 flex flex-col gap-3">
+              <div class="glass p-4">
+                <p class="font-mono text-[.45em] text-mint uppercase tracking-widest mb-2">Parcours de d&eacute;mo</p>
+                <ol class="text-[.5em] text-slate-300 space-y-2 leading-snug">
+                  <li><span class="font-mono text-cyanx">1.</span> Landing : promesse + CTA <em>&laquo; D&eacute;couvrir mon profil &raquo;</em></li>
+                  <li><span class="font-mono text-cyanx">2.</span> Quiz d&rsquo;onboarding : 12 questions, feedback imm&eacute;diat</li>
+                  <li><span class="font-mono text-cyanx">3.</span> R&eacute;v&eacute;lation de l&rsquo;arch&eacute;type : carte d&rsquo;identit&eacute; de joueur</li>
+                  <li><span class="font-mono text-cyanx">4.</span> Dashboard : recommandations &laquo; Best Match &raquo; &amp; progression</li>
+                </ol>
+              </div>
+              <div class="glass-strong p-3">
+                <p class="text-[.46em] text-slate-400 leading-snug"><span class="text-mint font-semibold">R&egrave;gle des 3 clics</span> respect&eacute;e : du CTA &agrave; la premi&egrave;re recommandation personnalis&eacute;e.</p>
+              </div>
+            </div>
+          </div>
+          <span class="src">Prototype V2 d&eacute;ploy&eacute; sur Vercel — livrable Prototype &amp; identit&eacute; visuelle (Sprint 3) &middot; dc-start-gghf.vercel.app</span>
+        </div>
+        <aside class="notes">
+          Voici le prototype, en ligne et fonctionnel — je bascule sur l'onglet dédié pour la démonstration, environ deux minutes, en suivant le parcours d'Alex. Un : la landing page — la promesse est immédiatement lisible, avec un seul appel à l'action en orange, "Découvrir mon profil de joueur" ; c'est l'application directe de la règle des trois clics et de la sobriété visuelle du Safe Space. Deux : le quiz d'onboarding — douze questions sur les motivations, le rapport à la difficulté et le temps disponible, avec un feedback visuel immédiat à chaque réponse ; vous vous souvenez de la rétrospective V1/V2 : ce quiz a été raccourci précisément parce que les premiers testeurs le trouvaient trop long. Trois : la révélation de l'archétype — la carte d'identité de joueur, l'élément qui transforme un test en moment valorisant ; c'est la Big Idea "Le Code de Votre Progrès" incarnée dans le produit. Quatre : le dashboard — les recommandations "Best Match" filtrées par l'archétype obtenu, les barres de progression en vert menthe, et l'accès aux guides en micro-learning découpés en étapes validables. Pendant que je navigue, notez la cohérence de la direction artistique avec ce support de soutenance : même fond sombre, mêmes accents menthe et orange — c'est un écosystème de marque unique. Conseil logistique pour moi-même : l'onglet du prototype est ouvert et connecté avant la soutenance, et en cas de panne réseau, la copie locale tourne sur cette machine avec npm run dev. [Revenir au support.] Vous avez vu le produit fonctionner ; voyons maintenant l'architecture qui porte tout cela.
+        </aside>
+      </section>
+
+      <!-- ============ 11. SPRINT 3 — ARCHITECTURE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; Bloc DEV &middot; Architecture</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Architecture <span class="grad-text">headless d&eacute;coupl&eacute;e</span></h2>
+          <div class="glass p-6">
+            <div class="flex items-stretch justify-between gap-3">
+              <div class="node flex-1 text-center fragment">
+                <p class="text-[.5em] text-slate-500 mb-1">CLIENTS</p>
+                <p class="text-[.6em] text-white font-semibold">Web &middot; Mobile</p>
+                <p class="text-[.45em] text-slate-400 mt-1">PC / consoles / cloud</p>
+              </div>
+              <div class="arrow self-center text-[.7em]">&#8596;</div>
+              <div class="node flex-1 text-center border !border-cyanx/40 fragment">
+                <p class="text-[.5em] text-cyanx mb-1">FRONTEND</p>
+                <p class="text-[.6em] text-white font-semibold">Next.js 15</p>
+                <p class="text-[.45em] text-slate-400 mt-1">SSR guides &middot; CSR dashboard<br>Tailwind CSS &middot; Vercel</p>
+              </div>
+              <div class="arrow self-center text-center text-[.7em]">&#8596;<p class="text-[.45em] text-slate-500">JSON-LD<br>JWT</p></div>
+              <div class="node flex-1 text-center border !border-mint/40 fragment">
+                <p class="text-[.5em] text-mint mb-1">BACKEND</p>
+                <p class="text-[.6em] text-white font-semibold">Symfony 7<br>+ API Platform</p>
+                <p class="text-[.45em] text-slate-400 mt-1">Moteur de scoring &middot; S&eacute;curit&eacute; native</p>
+              </div>
+              <div class="arrow self-center text-[.7em]">&#8596;</div>
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="node text-center fragment">
+                  <p class="text-[.55em] text-white font-semibold">PostgreSQL</p>
+                  <p class="text-[.45em] text-mint">JSONB profils</p>
+                </div>
+                <div class="node text-center fragment">
+                  <p class="text-[.55em] text-white font-semibold">Redis</p>
+                  <p class="text-[.45em] text-slate-400">cache API</p>
+                </div>
+                <div class="node text-center border !border-coral/40 fragment">
+                  <p class="text-[.55em] text-white font-semibold">API IGDB</p>
+                  <p class="text-[.45em] text-coral">m&eacute;tadonn&eacute;es jeux</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-center gap-3 fragment">
+              <span class="font-mono text-[.5em] text-slate-400">Socle transverse :</span>
+              <span class="font-mono text-[.5em] text-cyanx">Docker (parit&eacute; des environnements)</span>
+              <span class="text-slate-600">&middot;</span>
+              <span class="font-mono text-[.5em] text-mint">GitHub Actions (CI/CD)</span>
+              <span class="text-slate-600">&middot;</span>
+              <span class="font-mono text-[.5em] text-coral">Uptime cible 99,9&nbsp;%</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Voici l'architecture cible, dont le premier critère de choix a été l'évolutivité — c'est le fil rouge de toutes mes décisions d'architecte. J'ai retenu une architecture headless, découplant strictement le frontend du backend. Le frontend est une application Next.js 15, déployée sur Vercel. Le backend est une API Symfony 7 exposée via API Platform. Les deux communiquent en JSON-LD, sécurisés par des jetons JWT. Pourquoi ce découplage ? Trois raisons. Un : la maintenance isolée — je peux faire évoluer le moteur de recommandation sans toucher à l'interface, et inversement. Deux : la scalabilité horizontale — chaque étage se dimensionne indépendamment selon la charge. Trois, et c'est le plus stratégique : le backend devient un fournisseur de données universel, capable d'alimenter demain une application mobile native ou une intégration in-game, sans réécriture — ce qui répond au marché multi-support identifié lors de la recherche sectorielle. Sur la persistance, PostgreSQL avec le type JSONB pour les profils de joueurs — j'y reviens dans deux slides. Redis assure la mise en cache des réponses API, notamment celles de l'API externe IGDB, l'Internet Game Database, qui nous fournit les métadonnées de jeux. Enfin, le socle transverse : Docker garantit la parité des environnements entre développement, préproduction et production, et GitHub Actions orchestre l'intégration et le déploiement continus, avec un objectif de disponibilité de 99,9 %. Détaillons maintenant la justification de chaque brique.
+        </aside>
+      </section>
+
+      <!-- ============ 12. SPRINT 3 — JUSTIFICATION STACK ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; Bloc DEV &middot; Justification de la stack</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Chaque choix r&eacute;pond &agrave; <span class="grad-text">un besoin m&eacute;tier</span></h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.55em] text-cyanx mb-2">Next.js 15 <span class="text-slate-500">// frontend hybride</span></p>
+              <p class="text-[.55em] text-slate-300 leading-snug"><strong class="text-white">SSR</strong> sur les pages de guides &rarr; indexation SEO optimale (canal d&rsquo;acquisition de Camille). <strong class="text-white">CSR</strong> sur le dashboard &rarr; interactivit&eacute; fluide sans rechargement (exigence d&rsquo;Alex).</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.55em] text-mint mb-2">Symfony 7 + API Platform <span class="text-slate-500">// backend</span></p>
+              <p class="text-[.55em] text-slate-300 leading-snug">S&eacute;curit&eacute; native (XSS, CSRF, CSP), rigueur par injection de d&eacute;pendances. API Platform expose Guides &amp; Arch&eacute;types en <strong class="text-white">JSON-LD</strong>, interop&eacute;rable avec des API tierces (Steam, Riot).</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.55em] text-coral mb-2">PostgreSQL + JSONB <span class="text-slate-500">// persistance</span></p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Relationnel pour comptes et r&ocirc;les ; <strong class="text-white">JSONB binaire index&eacute;</strong> pour les scores d&rsquo;arch&eacute;types &eacute;volutifs &rarr; l&rsquo;algorithme it&egrave;re sans migration lourde du sch&eacute;ma.</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.55em] text-slate-300 mb-2">API IGDB <span class="text-slate-500">// donn&eacute;es externes</span></p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Index mondial des m&eacute;tadonn&eacute;es de jeux : on ne reconstruit pas l&rsquo;encyclop&eacute;die, on la <strong class="text-white">consomme et on la met en cache</strong> (Redis) pour ma&icirc;triser latence et quotas.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          En tant que Tech Lead, je considère qu'un choix technologique ne se justifie jamais par la mode, mais par un besoin métier traçable. Next.js 15, d'abord, pour son rendu hybride. Les pages de guides sont rendues côté serveur, en SSR : elles sont donc parfaitement indexables par les moteurs de recherche — c'est fondamental, car le SEO est le canal d'acquisition principal de Camille, qui tape "comment débuter sur" suivi du nom d'un jeu. À l'inverse, le dashboard utilisateur est rendu côté client, en CSR : l'interactivité est fluide, sans rechargement de page — exactement ce qu'exige Alex, qui abandonne à la première friction. Symfony 7 avec API Platform ensuite : Symfony apporte une sécurité native contre les attaques XSS et CSRF, une politique CSP, et une structure rigoureuse par injection de dépendances qui rend le code testable. API Platform expose nos ressources en JSON-LD, un format standardisé qui facilite l'interopérabilité future avec les API de Steam ou de Riot pour enrichir le profilage. PostgreSQL avec JSONB : c'est un choix dont je suis particulièrement satisfait. Nos profils de joueurs sont des données semi-structurées — les scores d'archétypes évoluent à chaque itération de l'algorithme. Le type JSONB les stocke en binaire indexé, avec la robustesse du relationnel pour les comptes, sans imposer une migration de schéma à chaque ajustement du scoring. Enfin l'API IGDB : nous consommons l'index mondial des jeux plutôt que de le reconstruire, avec un cache Redis pour maîtriser la latence et les quotas. Voyons comment ces données s'organisent.
+        </aside>
+      </section>
+
+      <!-- ============ 13. SPRINT 3 — MODÉLISATION BDD ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; Bloc DEV &middot; Mod&eacute;lisation des donn&eacute;es</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Un sch&eacute;ma <span class="grad-text">relationnel + flexible</span></h2>
+          <div class="glass p-6">
+            <div class="grid grid-cols-4 gap-4 items-start">
+              <div class="node fragment">
+                <p class="text-[.55em] text-cyanx font-semibold mb-1">user</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">uuid <span class="text-coral">PK</span><br>email &middot; roles[]<br>created_at</p>
+                <p class="text-[.4em] text-slate-500 mt-2 border-t border-slate-700 pt-1">RGPD : pseudonymis&eacute; par UUID</p>
+              </div>
+              <div class="node fragment border !border-mint/40">
+                <p class="text-[.55em] text-mint font-semibold mb-1">player_profile</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">user_id <span class="text-cyanx">FK 1&ndash;1</span><br>archetype_id <span class="text-cyanx">FK</span><br><span class="text-mint">scores JSONB</span> &#123;technicit&eacute;, social, temps&#125;</p>
+              </div>
+              <div class="node fragment">
+                <p class="text-[.55em] text-white font-semibold mb-1">archetype</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">uuid <span class="text-coral">PK</span><br>label &middot; description<br>weights JSONB</p>
+                <p class="text-[.4em] text-slate-500 mt-2 border-t border-slate-700 pt-1">1&ndash;N &rarr; recommandations</p>
+              </div>
+              <div class="node fragment">
+                <p class="text-[.55em] text-white font-semibold mb-1">game</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">uuid <span class="text-coral">PK</span><br><span class="text-coral">igdb_id</span> &middot; genre<br>metadata JSONB <span class="text-slate-500">(cache)</span></p>
+              </div>
+              <div class="node fragment">
+                <p class="text-[.55em] text-white font-semibold mb-1">guide</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">uuid <span class="text-coral">PK</span><br>game_id <span class="text-cyanx">FK</span> &middot; difficulty<br>archetype_match[]</p>
+              </div>
+              <div class="node fragment">
+                <p class="text-[.55em] text-white font-semibold mb-1">step</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">guide_id <span class="text-cyanx">FK 1&ndash;N</span><br>position &middot; media_url<br>content</p>
+              </div>
+              <div class="node fragment border !border-coral/40">
+                <p class="text-[.55em] text-coral font-semibold mb-1">progression</p>
+                <p class="text-[.45em] text-slate-400 leading-relaxed">user_id + step_id <span class="text-coral">PK</span><br>completed_at</p>
+                <p class="text-[.4em] text-slate-500 mt-2 border-t border-slate-700 pt-1">alimente barres &amp; KPI r&eacute;tention</p>
+              </div>
+              <div class="glass-strong p-3 fragment">
+                <p class="text-[.48em] text-slate-300 leading-snug"><span class="text-mint font-semibold">Principe :</span> relationnel strict pour l&rsquo;int&eacute;grit&eacute; (FK, contraintes), JSONB pour les structures &eacute;volutives du scoring.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Voici la modélisation de la base de données, pensée selon un principe simple : du relationnel strict partout où l'intégrité compte, du JSONB partout où la structure doit évoluer. Au centre du modèle, l'utilisateur — identifié par un UUID et non par des données nominatives : c'est la pseudonymisation exigée par le RGPD, appliquée dès la conception, "privacy by design". Chaque utilisateur possède un profil joueur en relation un-à-un, qui porte le champ le plus stratégique du schéma : les scores, stockés en JSONB. Ce document contient les poids des trois vecteurs de motivation — technicité, social, temps. Quand le data scientist rééquilibre l'algorithme et ajoute une dimension, on enrichit le document JSON, sans migration de schéma, sans interruption de service. Le profil pointe vers un archétype, qui porte lui-même ses pondérations en JSONB. Côté contenu : la table game référence l'identifiant IGDB et met en cache les métadonnées pour limiter les appels externes ; chaque guide est rattaché à un jeu et à des archétypes compatibles — c'est la clé du "Best Match" ; chaque guide se décompose en étapes ordonnées — la granularité du micro-learning. Enfin, la table progression croise utilisateur et étape : c'est elle qui alimente les barres de progression à l'écran, mais aussi nos KPI de rétention, et demain les rapports d'onboarding B2B vendus aux studios. Une même donnée sert donc l'expérience, le pilotage et le business model. Passons à la qualité logicielle.
+        </aside>
+      </section>
+
+      <!-- ============ 14. SPRINT 3 — QUALITÉ LOGICIELLE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; Bloc DEV &middot; Qualit&eacute; logicielle</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">La qualit&eacute; comme <span class="grad-text">garantie de r&eacute;tention</span></h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-mint uppercase tracking-widest mb-2">Normes &amp; outillage</p>
+              <ul class="text-[.52em] text-slate-300 space-y-1.5 leading-snug">
+                <li><span class="font-mono text-cyanx">ESLint + Prettier</span> c&ocirc;t&eacute; Next.js</li>
+                <li><span class="font-mono text-cyanx">PHPStan + PHP-CS-Fixer</span> c&ocirc;t&eacute; Symfony</li>
+                <li>Conventions de nommage univoques</li>
+                <li>Formatage bloquant en pre-commit</li>
+              </ul>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-cyanx uppercase tracking-widest mb-2">Code Review</p>
+              <ul class="text-[.52em] text-slate-300 space-y-1.5 leading-snug">
+                <li>Git flow par branches + Pull Request</li>
+                <li>Revue syst&eacute;matique par le Tech Lead avant merge</li>
+                <li>R&egrave;gle de tra&ccedil;abilit&eacute; : <span class="text-white">1 anomalie = 1 ticket</span> (Jira)</li>
+                <li>Documentation continue sur Notion</li>
+              </ul>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-coral uppercase tracking-widest mb-2">Pyramide de tests</p>
+              <div class="flex flex-col items-center gap-1 mt-2">
+                <div class="pyr bg-coral/80 w-24 h-8 grid place-items-center"><span class="font-mono text-[.4em] text-ink font-semibold">E2E</span></div>
+                <div class="bg-cyanx/70 w-40 h-8 grid place-items-center rounded-sm"><span class="font-mono text-[.4em] text-ink font-semibold">INT&Eacute;GRATION</span></div>
+                <div class="bg-mint/80 w-56 h-8 grid place-items-center rounded-sm"><span class="font-mono text-[.4em] text-ink font-semibold">UNITAIRES</span></div>
+              </div>
+              <p class="text-[.46em] text-slate-400 mt-2 leading-snug text-center">Cypress (parcours onboarding) &middot; tests API &middot; Jest / PHPUnit (scoring)</p>
+            </div>
+          </div>
+          <div class="glass-strong p-4 mt-4 fragment border-l-4 !border-l-mint">
+            <p class="text-[.58em] text-slate-200 leading-snug"><span class="font-mono text-mint text-[.8em] uppercase tracking-widest">Doctrine &middot;</span> L&rsquo;algorithme de scoring est couvert &agrave; 100&nbsp;% par les tests unitaires : c&rsquo;est le c&oelig;ur de la valeur, il ne r&eacute;gresse jamais silencieusement.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          La qualité logicielle n'est pas un sujet cosmétique pour GGHF : notre promesse produit, c'est de retenir des utilisateurs volatils — un bug sur l'onboarding, et le joueur qu'on devait sauver de l'abandon nous abandonne, nous. J'ai donc structuré la qualité sur trois niveaux. Premier niveau, les normes et l'outillage : côté frontend, ESLint et Prettier imposent l'analyse statique et le formatage ; côté backend, PHPStan pour l'analyse statique du PHP et PHP-CS-Fixer pour le style. Ces contrôles sont bloquants dès le pre-commit : un code non conforme ne peut tout simplement pas entrer dans l'historique. Les nomenclatures sont univoques et homogènes, comme l'exige le référentiel. Deuxième niveau, la revue de code : un flux Git par branches, chaque évolution passe par une Pull Request revue systématiquement par le Tech Lead avant intégration. La traçabilité suit la règle "une anomalie égale un ticket" dans Jira, et la connaissance est documentée en continu sur Notion — le savoir ne vit pas que dans les têtes. Troisième niveau, la stratégie de tests, organisée en pyramide. À la base, les tests unitaires avec Jest côté React et PHPUnit côté Symfony — avec une doctrine ferme : l'algorithme de scoring, cœur de la valeur, est couvert à cent pour cent ; il ne peut pas régresser silencieusement. Au milieu, les tests d'intégration valident les contrats de l'API. Au sommet, les tests end-to-end avec Cypress rejouent les parcours critiques réels, en premier lieu l'onboarding complet : questionnaire, archétype, première recommandation. Cette pyramide s'exécute automatiquement à chaque poussée de code — c'est le pipeline que voici.
+        </aside>
+      </section>
+
+      <!-- ============ 15. SPRINT 3 — CI/CD ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; Bloc DEV &middot; CI/CD</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Un pipeline <span class="grad-text">GitHub Actions</span> de bout en bout</h2>
+          <div class="glass p-6 mb-4">
+            <div class="flex items-center justify-between gap-2">
+              <div class="node text-center flex-1 fragment"><p class="text-[.5em] text-white font-semibold">Push / PR</p><p class="text-[.42em] text-slate-400">branche feature</p></div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="node text-center flex-1 fragment"><p class="text-[.5em] text-cyanx font-semibold">Lint &amp; Analyse</p><p class="text-[.42em] text-slate-400">ESLint &middot; PHPStan</p></div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="node text-center flex-1 fragment"><p class="text-[.5em] text-mint font-semibold">Tests</p><p class="text-[.42em] text-slate-400">Jest &middot; PHPUnit &middot; Cypress</p></div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="node text-center flex-1 fragment"><p class="text-[.5em] text-white font-semibold">Build Docker</p><p class="text-[.42em] text-slate-400">images versionn&eacute;es</p></div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="node text-center flex-1 fragment border !border-coral/40"><p class="text-[.5em] text-coral font-semibold">D&eacute;ploiement</p><p class="text-[.42em] text-slate-400">Vercel &middot; conteneurs API</p></div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="node text-center flex-1 fragment"><p class="text-[.5em] text-white font-semibold">Monitoring</p><p class="text-[.42em] text-slate-400">Lighthouse &middot; Vercel Analytics</p></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="glass p-4 fragment"><p class="text-[.55em] text-slate-300 leading-snug"><span class="text-mint font-semibold">Non-r&eacute;gression :</span> aucun merge sans pipeline vert — les tests automatis&eacute;s sont le contrat.</p></div>
+            <div class="glass p-4 fragment"><p class="text-[.55em] text-slate-300 leading-snug"><span class="text-cyanx font-semibold">Parit&eacute; d&rsquo;environnements :</span> Docker &eacute;limine le &laquo; &ccedil;a marche sur ma machine &raquo; du dev &agrave; la prod.</p></div>
+            <div class="glass p-4 fragment"><p class="text-[.55em] text-slate-300 leading-snug"><span class="text-coral font-semibold">Recette formalis&eacute;e :</span> pr&eacute;-production &rarr; panel de testeurs &rarr; PV de recette &rarr; mise en production.</p></div>
+          </div>
+        </div>
+        <aside class="notes">
+          Voici le workflow d'intégration et de déploiement continus, orchestré par GitHub Actions. Chaque poussée de code ou Pull Request déclenche la même séquence, sans exception. D'abord le lint et l'analyse statique — ESLint et PHPStan — qui rejettent immédiatement le code non conforme. Ensuite la suite de tests complète : unitaires avec Jest et PHPUnit, intégration sur l'API, et end-to-end avec Cypress sur les parcours critiques. Si tout est vert, le pipeline construit les images Docker versionnées — le même artefact traverse tous les environnements, c'est la garantie de parité : ce qui a été testé est exactement ce qui est déployé, on élimine structurellement le "ça marche sur ma machine". Le déploiement est ensuite automatique : le frontend sur Vercel, l'API en conteneurs. Et le pipeline ne s'arrête pas à la mise en ligne : Lighthouse et Vercel Analytics surveillent en continu la performance — rappelez-vous notre engagement d'un score supérieur à quatre-vingt-dix et d'un LCP sous 1,2 seconde sur les pages critiques. Trois principes gouvernent ce dispositif. Un : aucun merge sans pipeline vert — les tests automatisés sont le contrat d'équipe, pas une option. Deux : la parité d'environnements par Docker. Trois : l'automatisation ne remplace pas la validation humaine — les livraisons passent par la préproduction, sont recettées par le panel de bêta-testeurs, et la mise en production n'est déclenchée qu'après signature du procès-verbal de recette. Ce cadre étant posé, un Tech Lead doit aussi anticiper ce qui peut mal tourner : les risques techniques.
+        </aside>
+      </section>
+
+      <!-- ============ 16. SPRINT 3 — RISQUES & DETTE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-orange">04 &middot; Construire &middot; Bloc DEV &middot; Risques &amp; dette technique</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Anticiper plut&ocirc;t que <span class="grad-text">subir</span></h2>
+          <div class="flex gap-4 mb-4 items-stretch">
+            <div class="glass p-4 w-[34%] flex-shrink-0">
+              <p class="font-mono text-[.45em] text-slate-400 uppercase tracking-widest mb-1">Radar des risques</p>
+              <svg viewBox="0 0 320 240" class="w-full" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+                <defs>
+                  <linearGradient id="dangerZone" x1="0" y1="1" x2="1" y2="0">
+                    <stop offset="55%" stop-color="#F97316" stop-opacity="0"/>
+                    <stop offset="100%" stop-color="#F97316" stop-opacity=".18"/>
+                  </linearGradient>
+                </defs>
+                <rect x="42" y="14" width="262" height="186" fill="url(#dangerZone)" rx="8"/>
+                <line x1="42" y1="200" x2="304" y2="200" stroke="#334155" stroke-width="2"/>
+                <line x1="42" y1="200" x2="42" y2="14" stroke="#334155" stroke-width="2"/>
+                <line x1="173" y1="200" x2="173" y2="14" stroke="#1E293B" stroke-dasharray="5 5"/>
+                <line x1="42" y1="107" x2="304" y2="107" stroke="#1E293B" stroke-dasharray="5 5"/>
+                <text x="304" y="222" fill="#64748B" font-size="11" text-anchor="end">Probabilit&eacute; &rarr;</text>
+                <text x="26" y="20" fill="#64748B" font-size="11" transform="rotate(-90 26 20)" text-anchor="end">Impact &rarr;</text>
+
+                <circle cx="262" cy="46" r="9" fill="#F97316"/>
+                <text x="262" y="30" fill="#CBD5E1" font-size="11" text-anchor="middle">API IGDB</text>
+                <circle cx="196" cy="72" r="9" fill="#0EA5E9"/>
+                <text x="196" y="94" fill="#CBD5E1" font-size="11" text-anchor="middle">Surcharge</text>
+                <circle cx="92" cy="38" r="9" fill="#34D399"/>
+                <text x="92" y="60" fill="#CBD5E1" font-size="11" text-anchor="middle">RGPD</text>
+                <circle cx="212" cy="140" r="9" fill="#94A3B8"/>
+                <text x="212" y="162" fill="#CBD5E1" font-size="11" text-anchor="middle">D&eacute;sengagement</text>
+              </svg>
+            </div>
+            <div class="glass p-4 flex-1">
+              <table class="bench">
+                <thead><tr><th>Risque</th><th>Signal d&rsquo;alerte</th><th>Action corrective</th><th>Resp.</th></tr></thead>
+                <tbody>
+                  <tr class="fragment"><td class="font-semibold text-white"><span class="text-coral">&#9679;</span> Instabilit&eacute; API tierce (IGDB)</td><td>Erreurs fr&eacute;quentes, latence</td><td class="text-mint">Cache Redis, mode d&eacute;grad&eacute;, couche d&rsquo;abstraction API</td><td class="font-mono text-[.85em]">Tech Lead</td></tr>
+                  <tr class="fragment"><td class="font-semibold text-white"><span class="text-cyanx">&#9679;</span> Surcharge serveur</td><td>Temps de r&eacute;ponse &eacute;lev&eacute;s</td><td class="text-mint">Scalabilit&eacute; horizontale, optimisation du cache</td><td class="font-mono text-[.85em]">Tech Lead</td></tr>
+                  <tr class="fragment"><td class="font-semibold text-white"><span class="text-mint">&#9679;</span> Non-conformit&eacute; RGPD</td><td>Donn&eacute;es excessives collect&eacute;es</td><td class="text-mint">Pseudonymisation UUID, minimisation des champs</td><td class="font-mono text-[.85em]">Tech Lead</td></tr>
+                  <tr class="fragment"><td class="font-semibold text-white"><span class="text-slate-400">&#9679;</span> D&eacute;sengagement usager</td><td>R&eacute;tention en baisse</td><td class="text-mint">Onboarding simplifi&eacute;, it&eacute;rations UX</td><td class="font-mono text-[.85em]">UX + Tech</td></tr>
+                </tbody>
+              </table>
+              <span class="src">Radar de risques &amp; plan de pr&eacute;voyance : Cahier des charges §1.6 (Sprint 3)</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="glass p-4 fragment">
+              <p class="font-mono text-[.48em] text-cyanx uppercase tracking-widest mb-1">Gestion de la dette technique</p>
+              <p class="text-[.53em] text-slate-300 leading-snug">Arbitr&eacute;e chaque semaine en <strong class="text-white">COTECH</strong> : dette identifi&eacute;e &rarr; ticket &rarr; budget de refactoring sanctuaris&eacute; dans chaque sprint. 10&nbsp;% du budget d&eacute;di&eacute; Infrastructure &amp; S&eacute;curit&eacute;.</p>
+            </div>
+            <div class="glass p-4 fragment">
+              <p class="font-mono text-[.48em] text-coral uppercase tracking-widest mb-1">R&eacute;solution de bogues (C7.3)</p>
+              <p class="text-[.53em] text-slate-300 leading-snug">Analyse causale &rarr; reproduction par un <strong class="text-white">test qui &eacute;choue</strong> &rarr; correctif &rarr; test de non-r&eacute;gression int&eacute;gr&eacute; au pipeline. Le bug corrig&eacute; ne revient jamais.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Un radar de risques croisant probabilité et impact m'a permis de prioriser quatre risques majeurs, chacun doté d'un signal d'alerte mesurable et d'une action corrective prédéfinie — on ne réfléchit pas à la solution pendant l'incident, on l'exécute. Premier risque, le plus structurel : l'instabilité de l'API tierce IGDB, dont nous dépendons pour les métadonnées de jeux. Signal : erreurs fréquentes ou latence anormale. Réponse : le cache Redis sert les données déjà connues, un mode dégradé maintient le service, et surtout une couche d'abstraction isole IGDB derrière une interface — si le fournisseur devient défaillant, on le remplace sans réécrire le métier. Deuxième risque : la surcharge serveur en cas de pic — c'est précisément pour cela que l'architecture découplée permet la scalabilité horizontale. Troisième risque : la non-conformité RGPD, traitée à la racine par la pseudonymisation UUID et la minimisation des données collectées. Quatrième : le désengagement des usagers, adressé par l'itération UX continue avec le panel. Sur la dette technique, ma position de Tech Lead est claire : la dette n'est pas un échec, c'est un emprunt — à condition de le tracer et de le rembourser. Elle est arbitrée chaque semaine en comité technique, chaque dette identifiée devient un ticket, et un budget de refactoring est sanctuarisé dans chaque sprint. Enfin, la résolution de bogues suit une méthode systématique : analyse causale, reproduction du bug par un test qui échoue, correctif, puis intégration de ce test au pipeline — un bug corrigé ne peut ainsi jamais réapparaître silencieusement. Le produit est solide ; reste à le faire exister sur le marché : c'est la phase d'activation.
+        </aside>
+      </section>
+
+      <!-- ============ 17. SPRINT 4 — MARKETING MIX ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip">05 &middot; Activer &middot; Marketing &amp; viabilit&eacute; &middot; 5 min</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Marketing Mix : <span class="grad-text">les 4P de GGHF</span></h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-mint uppercase tracking-widest mb-2">Produit</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Exp&eacute;rience de m&eacute;diation compl&egrave;te : profilage + micro-learning + design system &laquo; Safe Space &raquo;. <strong class="text-white">Freemium sur 3 genres majeurs</strong> (MOBA, FPS, RPG).</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-coral uppercase tracking-widest mb-2">Prix</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">B2C : gratuit + Premium <strong class="text-coral">4,99&nbsp;&euro;/mois</strong>. B2B : rapports d&rsquo;onboarding <strong class="text-white">1&nbsp;500&nbsp;&euro;</strong> &middot; affiliation <strong class="text-white">5&nbsp;%</strong> sur les jeux recommand&eacute;s.</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-cyanx uppercase tracking-widest mb-2">Place (Distribution)</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">100&nbsp;% num&eacute;rique : web responsive d&eacute;ploy&eacute; sur Vercel, sans t&eacute;l&eacute;chargement. L&rsquo;architecture headless ouvre l&rsquo;extension <strong class="text-white">mobile native</strong>.</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-slate-400 uppercase tracking-widest mb-2">Promotion</p>
+              <p class="text-[.55em] text-slate-300 leading-snug"><strong class="text-white">SEO</strong> pour Camille (&laquo; comment d&eacute;buter sur&hellip; &raquo;) &middot; <strong class="text-white">viralit&eacute; TikTok / Discord</strong> pour Alex &middot; <strong class="text-white">LinkedIn &amp; salons</strong> pour le B2B.</p>
+              <p class="font-mono text-[.44em] text-slate-400 mt-2 leading-snug">Budget com : 10 k&euro; &mdash; 4 k&euro; social ads &middot; 3,5 k&euro; influence (5 micro-influenceurs) &middot; 1,5 k&euro; contenus &middot; 1 k&euro; outils SaaS</p>
+            </div>
+          </div>
+          <div class="glass-strong p-4 mt-4 fragment text-center">
+            <p class="text-[.6em] text-slate-200">Big Idea : <span class="font-display font-bold text-mint">&laquo; Le Code de Votre Progr&egrave;s &raquo;</span> — le test d&rsquo;arch&eacute;type comme qu&ecirc;te de d&eacute;couverte de soi.</p>
+          </div>
+          <span class="src">Prix 4,99&nbsp;&euro;/mois, rapports B2B 1&nbsp;500&nbsp;&euro;, affiliation 5&nbsp;% : Business plan §3 (Sprint 3) &middot; 4P &amp; canaux : Strat&eacute;gie marketing §5 (Sprint 4) &middot; Budget com d&eacute;taill&eacute; &amp; objectifs canaux (50 000 impressions/mois, 1 000 tests d&rsquo;arch&eacute;type/mois, 100 adh&eacute;sions Discord/mois) : Strat&eacute;gie de communication §5.3 &amp; §6.1 (Sprint 4)</span>
+        </div>
+        <aside class="notes">
+          Dernière ligne droite : transformer le produit en projet de marché. Le marketing mix s'articule autour des quatre P. Le Produit d'abord : GGHF ne se vend pas comme une base de guides, mais comme une expérience de médiation complète — le moteur de profilage, le micro-learning et un design system pensé comme un espace rassurant. Le lancement est freemium, concentré sur les trois genres majeurs du MVP. Le Prix : une stratégie hybride. Côté B2C, l'accès gratuit abaisse la barrière d'entrée pour capter les débutants, et l'abonnement Premium à quatre euros quatre-vingt-dix-neuf par mois — un prix psychologique — débloque le suivi de progression avancé et les parcours experts. Côté B2B, nous monétisons la donnée d'onboarding : des rapports d'analyse des points de friction vendus mille cinq cents euros aux studios, plus une commission d'affiliation de cinq pour cent sur les jeux recommandés. La Place : une distribution cent pour cent numérique, web responsive sur Vercel, sans téléchargement — et l'architecture headless présentée au cœur technique rend l'extension mobile native possible sans réécriture : vous voyez la cohérence entre choix techniques et stratégie de distribution. La Promotion, enfin, est calquée sur les personas : le SEO capte Camille sur ses recherches Google, les formats courts TikTok et les serveurs Discord captent Alex, LinkedIn et les salons adressent les studios. Le tout est unifié par notre Big Idea créative, "Le Code de Votre Progrès" : transformer le profilage technique en quête de découverte de soi — "Et si votre plus grand obstacle en jeu était de ne pas connaître votre propre force ?". Voyons le plan d'activation et les chiffres.
+        </aside>
+      </section>
+
+      <!-- ============ 17bis. SPRINT 4 — PLAN DE COMMUNICATION ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip">05 &middot; Activer &middot; Plan de communication</span>
+          <h2 class="font-display font-extrabold text-[1.25em] text-white mt-3 mb-4">10 k&euro; investis : <span class="grad-text">campagne &amp; calendrier &eacute;ditorial</span></h2>
+
+          <div class="glass p-4 mb-4">
+            <div class="flex items-center justify-between gap-3">
+              <div class="text-center flex-1 fragment">
+                <p class="font-mono text-[.45em] text-cyanx mb-1">S1&ndash;S4 &middot; TEASING</p>
+                <p class="text-[.52em] text-slate-300 leading-snug">Campagne myst&egrave;re : &laquo; Quel type de joueur &ecirc;tes-vous vraiment ? &raquo;</p>
+              </div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="text-center flex-1 fragment">
+                <p class="font-mono text-[.45em] text-mint mb-1">S5&ndash;S8 &middot; B&Ecirc;TA</p>
+                <p class="text-[.52em] text-slate-300 leading-snug">Test d&rsquo;arch&eacute;type ouvert aux 30 testeurs &middot; #GGHFMyStyle</p>
+              </div>
+              <span class="arrow text-[.6em]">&rarr;</span>
+              <div class="text-center flex-1 fragment">
+                <p class="font-mono text-[.45em] text-coral mb-1">S9&ndash;S10 &middot; LANCEMENT</p>
+                <p class="text-[.52em] text-slate-300 leading-snug">MVP en ligne + 5 micro-influenceurs p&eacute;dagogues MOBA &amp; RPG</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-stretch">
+            <div class="glass p-4 flex-1">
+              <p class="font-mono text-[.45em] text-slate-400 uppercase tracking-widest mb-1">Calendrier &eacute;ditorial hebdomadaire</p>
+              <table class="bench">
+                <thead><tr><th>Jour</th><th>Canal</th><th>Format</th><th>Cible &amp; objectif</th></tr></thead>
+                <tbody>
+                  <tr class="fragment"><td class="font-semibold text-white">Lundi</td><td class="font-mono text-[.85em] text-cyanx">TikTok</td><td>&laquo; Le saviez-vous ? &raquo; (hebdo)</td><td>Alex &middot; astuce anti &laquo; ragequit &raquo;</td></tr>
+                  <tr class="fragment"><td class="font-semibold text-white">Mercredi</td><td class="font-mono text-[.85em] text-mint">Blog / SEO</td><td>Dossier psychologie (bimensuel)</td><td>Camille &middot; comprendre l&rsquo;attrition</td></tr>
+                  <tr class="fragment"><td class="font-semibold text-white">Vendredi</td><td class="font-mono text-[.85em] text-coral">Instagram</td><td>Portrait d&rsquo;arch&eacute;type (hebdo)</td><td>Camille &middot; valoriser un style de jeu</td></tr>
+                  <tr class="fragment"><td class="font-semibold text-white">Dimanche</td><td class="font-mono text-[.85em] text-slate-300">Discord</td><td>R&eacute;cap communaut&eacute; (hebdo)</td><td>R&eacute;tention &middot; guides communautaires</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="glass p-4 w-[36%] flex-shrink-0">
+              <p class="font-mono text-[.45em] text-slate-400 uppercase tracking-widest mb-2">Budget com &middot; 10 000 &euro;</p>
+              <div class="space-y-2.5">
+                <div class="fragment">
+                  <div class="flex justify-between text-[.48em]"><span class="text-slate-300">Social ads (TikTok / Insta)</span><span class="font-mono text-cyanx">4 000 &euro;</span></div>
+                  <div class="h-2 rounded-full bg-slate-800 mt-1"><div class="h-2 rounded-full bg-cyanx" style="width:100%"></div></div>
+                  <p class="text-[.4em] text-slate-500 mt-0.5">Objectif : 50 000 impressions / mois</p>
+                </div>
+                <div class="fragment">
+                  <div class="flex justify-between text-[.48em]"><span class="text-slate-300">Influence (5 micro-influenceurs)</span><span class="font-mono text-mint">3 500 &euro;</span></div>
+                  <div class="h-2 rounded-full bg-slate-800 mt-1"><div class="h-2 rounded-full bg-mint" style="width:87.5%"></div></div>
+                  <p class="text-[.4em] text-slate-500 mt-0.5">Sessions de test en direct &middot; adh&eacute;sions Discord qualifi&eacute;es</p>
+                </div>
+                <div class="fragment">
+                  <div class="flex justify-between text-[.48em]"><span class="text-slate-300">Cr&eacute;ation de contenus</span><span class="font-mono text-coral">1 500 &euro;</span></div>
+                  <div class="h-2 rounded-full bg-slate-800 mt-1"><div class="h-2 rounded-full bg-coral" style="width:37.5%"></div></div>
+                </div>
+                <div class="fragment">
+                  <div class="flex justify-between text-[.48em]"><span class="text-slate-300">Outils SaaS (CRM, analytics)</span><span class="font-mono text-slate-300">1 000 &euro;</span></div>
+                  <div class="h-2 rounded-full bg-slate-800 mt-1"><div class="h-2 rounded-full bg-slate-400" style="width:25%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="src">Campagne &laquo; Unleash Your Archetype &raquo;, calendrier &eacute;ditorial &amp; budget d&eacute;taill&eacute; : Strat&eacute;gie de communication §5.1&ndash;5.3 (Sprint 4) &middot; Plan de pr&eacute;voyance : &lt; 5 % de clics &rarr; A/B testing des accroches (§5.4)</span>
+        </div>
+        <aside class="notes">
+          Zoom sur l'investissement communication : dix mille euros, pris sur l'enveloppe marketing du budget global, et pilotés au réel. La campagne de lancement, "Unleash Your Archetype", est séquencée sur les dix semaines de réalisation du MVP pour créer une montée en puissance. Phase un, le teasing, semaines une à quatre : une campagne mystère sur TikTok et X — "Quel type de joueur êtes-vous vraiment ?" — sans révéler la solution, pour installer la question de l'archétype. Phase deux, la bêta, semaines cinq à huit : le test d'archétype s'ouvre au panel de trente testeurs, dont les résultats sont partagés sur Instagram avec le hashtag GGHFMyStyle — la preuve sociale avant le lancement. Phase trois, semaines neuf et dix : mise en ligne du MVP relayée par cinq micro-influenceurs pédagogues sur les genres MOBA et RPG. Ensuite, le calendrier éditorial installe une présence régulière sans saturation, et chaque rendez-vous sert un persona précis : le lundi, une astuce courte anti-ragequit sur TikTok pour Alex ; le mercredi, un dossier de fond sur la psychologie du joueur en SEO pour Camille ; le vendredi, un portrait d'archétype esthétique sur Instagram ; le dimanche, le récap communautaire sur Discord pour la rétention. Côté budget : quatre mille euros de publicité sociale calibrés pour cinquante mille impressions mensuelles, trois mille cinq cents euros pour les micro-influenceurs, mille cinq cents de production de contenus et mille d'outils. Et un plan de prévoyance est prêt : si le taux de clic passe sous les cinq pour cent, on bascule sur de l'A/B testing des accroches et une simplification du quiz. Voyons maintenant la viabilité financière d'ensemble.
+        </aside>
+      </section>
+
+      <!-- ============ 18. SPRINT 4 — COMMUNICATION & FINANCES ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip">05 &middot; Activer &middot; Viabilit&eacute; financi&egrave;re</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Un plan financ&eacute;, <span class="grad-text">un point mort &agrave; 18 mois</span></h2>
+          <div class="grid grid-cols-2 gap-5">
+            <div class="space-y-3">
+              <div class="glass p-4 fragment">
+                <p class="font-mono text-[.48em] text-mint uppercase tracking-widest mb-1">Financement &middot; 80 000 &euro;</p>
+                <p class="text-[.53em] text-slate-300 leading-snug">Apports &amp; capital <strong class="text-white">20 k&euro;</strong> &middot; Pr&ecirc;t d&rsquo;honneur / bancaire <strong class="text-white">40 k&euro;</strong> &middot; Bourse French Tech <strong class="text-white">20 k&euro;</strong></p>
+              </div>
+              <div class="glass p-4 fragment">
+                <p class="font-mono text-[.48em] text-cyanx uppercase tracking-widest mb-1">Allocation &middot; Build first</p>
+                <div class="flex h-5 rounded-full overflow-hidden mt-2 mb-1">
+                  <div class="bg-mint" style="width:50%"></div>
+                  <div class="bg-cyanx" style="width:18.75%"></div>
+                  <div class="bg-coral" style="width:18.75%"></div>
+                  <div class="bg-slate-600" style="width:12.5%"></div>
+                </div>
+                <p class="text-[.44em] text-slate-400 leading-snug"><span class="text-mint">&#9632;</span> R&amp;D 40&nbsp;k&euro; &middot; 50&nbsp;% &nbsp;&nbsp;<span class="text-cyanx">&#9632;</span> UX/UI 15&nbsp;k&euro; &middot; 18,75&nbsp;% &nbsp;&nbsp;<span class="text-coral">&#9632;</span> Marketing &amp; contenus 15&nbsp;k&euro; &middot; 18,75&nbsp;% &nbsp;&nbsp;<span class="text-slate-500">&#9632;</span> Infra &amp; s&eacute;curit&eacute; 10&nbsp;k&euro; &middot; 12,5&nbsp;%</p>
+                <p class="fragment appear-grow text-[.44em] text-slate-300 mt-2 pt-2 border-t border-slate-700/60 leading-snug"><span class="text-mint font-semibold">D&eacute;tail R&amp;D (40 k&euro;)</span> : build sur <strong class="text-white">14 semaines / 7 sprints</strong> — d&eacute;veloppement fullstack Next.js &amp; Symfony, moteur de scoring propri&eacute;taire (data science), int&eacute;gration API IGDB &amp; CMS de guides, socle DevOps (Docker, CI/CD, monitoring).</p>
+              </div>
+              <div class="glass p-4 fragment">
+                <p class="font-mono text-[.48em] text-coral uppercase tracking-widest mb-1">Sc&eacute;narios de r&eacute;silience</p>
+                <p class="text-[.53em] text-slate-300 leading-snug"><span class="text-mint font-semibold">Optimiste :</span> partenariat &eacute;diteur majeur au M10 &rarr; rentabilit&eacute; d&egrave;s M12. <span class="text-coral font-semibold">Pessimiste :</span> CAC doubl&eacute; &rarr; pivot : &minus;50&nbsp;% marketing, salaire dirigeant report&eacute; &agrave; M24.</p>
+              </div>
+            </div>
+            <div class="glass p-5">
+              <p class="font-mono text-[.5em] text-slate-400 uppercase tracking-widest mb-2">Projection &agrave; 3 ans (HT, k&euro;)</p>
+              <svg viewBox="0 0 440 235" class="w-full" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+                <rect x="94" y="30" width="10" height="10" fill="#34D399" rx="2"/>
+                <text x="110" y="39" fill="#94A3B8" font-size="11">CA</text>
+                <rect x="150" y="30" width="10" height="10" fill="#0EA5E9" rx="2"/>
+                <text x="166" y="39" fill="#94A3B8" font-size="11">R&eacute;sultat net</text>
+                <rect x="256" y="30" width="10" height="10" fill="#F97316" rx="2"/>
+                <text x="272" y="39" fill="#94A3B8" font-size="11">D&eacute;ficit</text>
+
+                <line x1="235" y1="14" x2="235" y2="160" stroke="#F97316" stroke-width="1.5" stroke-dasharray="5 4" opacity=".7"/>
+                <text x="235" y="10" fill="#FB923C" font-size="11" text-anchor="middle">Point mort &middot; M18</text>
+
+                <line x1="30" y1="160" x2="430" y2="160" stroke="#334155" stroke-width="2"/>
+
+                <rect x="68" y="146.5" width="38" height="13.5" fill="#34D399" rx="3"/>
+                <text x="87" y="140" fill="#34D399" font-size="12" text-anchor="middle">22,5</text>
+                <rect x="110" y="160" width="38" height="31" fill="#F97316" rx="3"/>
+                <text x="129" y="205" fill="#FB923C" font-size="12" text-anchor="middle">&minus;52</text>
+
+                <rect x="193" y="103" width="38" height="57" fill="#34D399" rx="3"/>
+                <text x="212" y="96" fill="#34D399" font-size="12" text-anchor="middle">95</text>
+                <rect x="235" y="155" width="38" height="5" fill="#0EA5E9" rx="2"/>
+                <text x="254" y="148" fill="#38BDF8" font-size="12" text-anchor="middle">+8,5</text>
+
+                <rect x="318" y="22" width="38" height="138" fill="#34D399" rx="3"/>
+                <text x="337" y="16" fill="#34D399" font-size="12" text-anchor="middle">230</text>
+                <rect x="360" y="103" width="38" height="57" fill="#0EA5E9" rx="3"/>
+                <text x="379" y="96" fill="#38BDF8" font-size="12" text-anchor="middle">+95</text>
+
+                <text x="108" y="228" fill="#64748B" font-size="12" text-anchor="middle">An 1</text>
+                <text x="233" y="228" fill="#64748B" font-size="12" text-anchor="middle">An 2</text>
+                <text x="358" y="228" fill="#64748B" font-size="12" text-anchor="middle">An 3</text>
+              </svg>
+              <div class="mt-4 p-3 rounded-lg border border-coral/40 bg-coral/10 fragment">
+                <p class="text-[.55em] text-slate-200"><span class="font-mono text-coral font-semibold">POINT MORT : M18</span> &middot; tr&eacute;sorerie pr&eacute;serv&eacute;e dans les deux sc&eacute;narios de r&eacute;silience test&eacute;s.</p>
+              </div>
+              <p class="text-[.48em] text-slate-400 mt-3 leading-snug fragment"><span class="text-cyanx font-semibold">Hypoth&egrave;ses de projection :</span> CA An 1 = abonnements Premium (4,99&nbsp;&euro;/mois) + premiers rapports B2B (1&nbsp;500&nbsp;&euro;) + affiliation 5&nbsp;% &middot; acquisition cibl&eacute;e : 50&nbsp;000 impressions &amp; 1&nbsp;000 tests d&rsquo;arch&eacute;type/mois &middot; KPIs suivis : compl&eacute;tion &gt;&nbsp;70&nbsp;%, CAC, conversion Premium, NPS, toxicit&eacute; &lt;&nbsp;1&nbsp;%.</p>
+            </div>
+          </div>
+          <span class="src">Financement 80 k&euro;, projection 3 ans, sc&eacute;narios &amp; point mort M18 : Business plan &amp; mod&egrave;le financier §4&ndash;5 + tableur FISY-ESSENTIEL (Sprint 3) &middot; Allocation budg&eacute;taire : Cahier des charges §3.5 &middot; D&eacute;tail R&amp;D (14 semaines / 7 sprints, &eacute;quipe build) : Dossier de management §2 &amp; §4.1 (Sprint 3) &middot; KPIs : Strat&eacute;gie marketing §4.2</span>
+        </div>
+        <aside class="notes">
+          Parlons viabilité. Le besoin de financement initial est de quatre-vingt mille euros, sécurisé par trois sources complémentaires : vingt mille euros d'apports personnels et de capital, quarante mille euros de prêt d'honneur et bancaire, et vingt mille euros de bourse French Tech — rendue crédible par l'éligibilité au statut de Jeune Entreprise Innovante identifiée dès le PESTEL. L'allocation de ces fonds est un choix assumé de Tech Lead : cinquante pour cent du budget — quarante mille euros — vont à la R&D, car le moteur de scoring propriétaire est l'actif différenciant de l'entreprise ; c'est lui qui rend la personnalisation scalable, donc le modèle freemium viable. Concrètement, ces quarante mille euros financent le build sur quatorze semaines, soit sept sprints de deux semaines, tel que planifié dans le dossier de management : le développement fullstack sur Next.js et Symfony, la modélisation data du moteur de scoring et des archétypes, l'intégration de l'API IGDB et du CMS de guides, et le socle DevOps — Docker, pipeline CI/CD et monitoring. Ce n'est pas une dépense, c'est la constitution de l'actif technologique de l'entreprise. Le solde se répartit entre quinze mille euros pour l'UX — la création de l'environnement accueillant et non compétitif —, quinze mille pour le marketing et les contenus, dont l'enveloppe communication de dix mille euros que je viens de détailler, et dix mille euros sanctuarisés pour l'infrastructure et la sécurité, afin de croître sans dette technique majeure. La résilience du plan a été testée par scénarios : dans l'hypothèse optimiste, un partenariat avec un éditeur majeur au dixième mois avance la rentabilité au douzième ; dans l'hypothèse pessimiste — adoption B2B lente et coût d'acquisition client doublé —, le pivot est prêt : réduction de moitié des frais marketing et report du salaire dirigeant au vingt-quatrième mois pour préserver la trésorerie. Côté projections : vingt-deux mille cinq cents euros de chiffre d'affaires en année un, quatre-vingt-quinze mille en année deux, deux cent trente mille en année trois, avec un résultat net qui passe du rouge au vert dès la deuxième année. Le point mort est atteint au dix-huitième mois, et la trésorerie reste positive dans les deux scénarios testés. Le pilotage est data-driven, du taux de complétion du test jusqu'à l'indice de toxicité de la communauté. J'en arrive à ma conclusion.
+        </aside>
+      </section>
+
+      <!-- ============ 19. CONCLUSION — RÉTROSPECTIVE ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-cyan">06 &middot; Se projeter &middot; R&eacute;trospective &middot; 4 min</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-4">Ce que le marathon <span class="grad-text">m&rsquo;a appris</span></h2>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-mint uppercase tracking-widest mb-2">Posture Tech Lead</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Arbitrer, c&rsquo;est renoncer : p&eacute;rim&egrave;tre MVP r&eacute;duit &agrave; 3 genres, IA complexe report&eacute;e, fonctionnalit&eacute;s hors p&eacute;rim&egrave;tre assum&eacute;es. <strong class="text-white">La valeur avant la prouesse.</strong></p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-cyanx uppercase tracking-widest mb-2">Management</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">Gouvernance &agrave; 3 niveaux (Daily, Sprint Review, COPIL), matrice RACI, r&egrave;gle 1 anomalie = 1 ticket : <strong class="text-white">la clart&eacute; des r&ocirc;les lib&egrave;re l&rsquo;&eacute;quipe</strong>, elle ne la contraint pas.</p>
+            </div>
+            <div class="glass p-5 fragment">
+              <p class="font-mono text-[.5em] text-coral uppercase tracking-widest mb-2">Gestion de l&rsquo;incertitude</p>
+              <p class="text-[.55em] text-slate-300 leading-snug">V1 &rarr; V2 du prototype : onboarding raccourci, hi&eacute;rarchie visuelle refondue, contrastes WCAG. <strong class="text-white">Le feedback utilisateur tranche</strong> l&agrave; o&ugrave; l&rsquo;intuition d&eacute;bat.</p>
+            </div>
+          </div>
+          <div class="glass-strong p-5 mt-5 fragment">
+            <p class="text-[.62em] text-slate-200 leading-relaxed text-center">De l&rsquo;id&eacute;ation &agrave; la viabilit&eacute; financi&egrave;re, GGHF d&eacute;montre qu&rsquo;une <span class="text-mint font-semibold">conviction de joueur</span> peut devenir un <span class="text-cyanx font-semibold">produit architectur&eacute;</span> et un <span class="text-coral font-semibold">mod&egrave;le &eacute;conomique cr&eacute;dible</span>.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Avant les perspectives, un mot de rétrospective honnête sur ce que ce marathon m'a appris — trois apprentissages majeurs. Le premier concerne la posture de Tech Lead : arbitrer, c'est renoncer. J'ai volontairement réduit le périmètre du MVP à trois genres de jeux, reporté l'intelligence artificielle complexe et sorti explicitement certaines fonctionnalités du périmètre. Ces renoncements ne sont pas des faiblesses : ce sont eux qui rendent le projet livrable en dix semaines et le moteur de recommandation validable. La valeur avant la prouesse technique. Le deuxième apprentissage est managérial : la gouvernance à trois niveaux — daily quotidien pour lever les blocages, sprint review bimensuelle avec le panel de testeurs, comité de pilotage mensuel pour les arbitrages stratégiques — combinée à la matrice RACI et à la règle "une anomalie, un ticket", m'a montré que la clarté des rôles libère une équipe au lieu de la contraindre. Chacun sait qui décide, qui fait, qui est consulté : l'énergie va dans la production, pas dans la friction. Le troisième apprentissage porte sur la gestion de l'incertitude : entre la V1 et la V2 du prototype, les tests utilisateurs ont invalidé mes certitudes — l'onboarding jugé trop long a été raccourci, la hiérarchie visuelle des guides refondue, les contrastes alignés sur les normes WCAG. Le feedback utilisateur tranche là où l'intuition débat sans fin. En synthèse : GGHF démontre qu'une conviction de joueur peut devenir un produit architecturé et un modèle économique crédible. Reste à se projeter : voici la roadmap.
+        </aside>
+      </section>
+
+      <!-- ============ 20. ROADMAP & MERCI ============ -->
+      <section>
+        <div class="pt-9">
+          <span class="chip chip-cyan">06 &middot; Se projeter &middot; Perspectives</span>
+          <h2 class="font-display font-extrabold text-[1.3em] text-white mt-3 mb-5">La roadmap : <span class="grad-text">du web au c&oelig;ur du jeu</span></h2>
+          <div class="glass p-6 mb-5">
+            <div class="flex items-center justify-between gap-2">
+              <div class="text-center flex-1 fragment">
+                <div class="w-4 h-4 rounded-full bg-mint mx-auto mb-2"></div>
+                <p class="font-mono text-[.48em] text-mint">AUJOURD&rsquo;HUI</p>
+                <p class="text-[.52em] text-slate-300 leading-snug mt-1">MVP web en ligne<br>3 genres &middot; profilage V2</p>
+              </div>
+              <div class="h-px flex-1 bg-gradient-to-r from-mint to-cyanx"></div>
+              <div class="text-center flex-1 fragment">
+                <div class="w-4 h-4 rounded-full bg-cyanx mx-auto mb-2"></div>
+                <p class="font-mono text-[.48em] text-cyanx">M+6</p>
+                <p class="text-[.52em] text-slate-300 leading-snug mt-1">App mobile native<br>(m&ecirc;me API headless)</p>
+              </div>
+              <div class="h-px flex-1 bg-gradient-to-r from-cyanx to-coral"></div>
+              <div class="text-center flex-1 fragment">
+                <div class="w-4 h-4 rounded-full bg-coral mx-auto mb-2"></div>
+                <p class="font-mono text-[.48em] text-coral">M+12</p>
+                <p class="text-[.52em] text-slate-300 leading-snug mt-1">Scoring enrichi ML<br>API Steam / Riot</p>
+              </div>
+              <div class="h-px flex-1 bg-gradient-to-r from-coral to-slate-500"></div>
+              <div class="text-center flex-1 fragment">
+                <div class="w-4 h-4 rounded-full bg-slate-400 mx-auto mb-2"></div>
+                <p class="font-mono text-[.48em] text-slate-300">VISION</p>
+                <p class="text-[.52em] text-slate-300 leading-snug mt-1">Overlay in-game<br>temps r&eacute;el (SDK studios)</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center fragment">
+            <h3 class="font-display font-extrabold text-[1.4em]"><span class="grad-text">Merci.</span></h3>
+            <p class="text-[.6em] text-slate-400 mt-2">Place &agrave; vos questions.</p>
+            <p class="font-mono text-[.5em] text-cyanx mt-4">dc-start-gghf.vercel.app &nbsp;&middot;&nbsp; Thomas QUERREC &middot; Mast&egrave;re Tech Lead</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Je termine par la roadmap technique, qui illustre pourquoi mes choix d'architecture n'étaient pas seulement des choix de confort, mais des paris sur l'avenir. Aujourd'hui, le MVP web est en ligne sur Vercel, avec le profilage en version deux et trois genres couverts. À six mois : l'application mobile native. Grâce à l'architecture headless, le backend Symfony existant l'alimente tel quel — zéro réécriture serveur, c'est le retour sur investissement direct du découplage. À douze mois : l'enrichissement du moteur de scoring par apprentissage automatique, nourri par les données de progression accumulées, et la connexion aux API de Steam et de Riot pour un profilage basé sur le comportement de jeu réel, plus seulement déclaratif. Et la vision à long terme, celle qui me motive le plus : l'overlay in-game en temps réel — un SDK proposé aux studios pour que le micro-learning GGHF s'affiche contextuellement dans le jeu, au moment exact où le joueur en a besoin. Ce serait l'aboutissement du positionnement de médiateur : ne plus être à côté du jeu, mais dans le jeu. La boucle serait bouclée : le joueur frustré de mes débuts, celui des soixante-deux pour cent, ne quitterait plus jamais la partie faute d'avoir été accompagné. Merci de votre attention — le prototype est consultable à l'adresse affichée, et je suis maintenant à votre disposition pour les questions.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+  <script>
+    Reveal.initialize({
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      hash: true,
+      controls: false,
+      progress: true,
+      transition: 'fade',
+      backgroundTransition: 'none',
+      slideNumber: false,
+      plugins: [ RevealNotes ]
+    });
+
+    function updateCounter() {
+      var current = Reveal.getSlidePastCount() + 1;
+      var total = Reveal.getTotalSlides();
+      document.getElementById('slide-counter').textContent = current + ' / ' + total;
+    }
+    Reveal.on('ready', updateCounter);
+    Reveal.on('slidechanged', updateCounter);
+
+    function openNotes() {
+      var notes = Reveal.getPlugin('notes');
+      if (notes && notes.open) notes.open();
+    }
+
+    // Navigation au clic : moitié droite de l'écran = avancer (fragment ou
+    // slide), moitié gauche = reculer.
+    // Ce script est aussi chargé dans les iframes d'aperçu de la vue orateur
+    // (mode "receiver") : dans ce cas, le clic pilote la présentation
+    // principale via window.parent.opener au lieu de l'aperçu local.
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('a, button, input, textarea, select, iframe, video, #deck-header')) return;
+      if (window.getSelection && String(window.getSelection())) return;
+      var api = Reveal;
+      if (/receiver/i.test(window.location.search)) {
+        try { api = window.parent.opener.Reveal; } catch (err) { return; }
+      }
+      if (!api) return;
+      if (e.clientX < window.innerWidth / 2) { api.prev(); } else { api.next(); }
+    });
+
+    // Personnalisation de la vue orateur : timer toujours visible + retour en haut
+    // des notes à chaque changement de slide. La fenêtre orateur est ouverte via
+    // window.open par le plugin ; on intercepte le handle pour injecter nos réglages.
+    (function () {
+      var speakerWin = null;
+      var nativeOpen = window.open;
+      window.open = function (url, name) {
+        var win = nativeOpen.apply(window, arguments);
+        if (win && typeof name === 'string' && /notes/i.test(name)) {
+          speakerWin = win;
+          tweakSpeakerView(win);
+        }
+        return win;
+      };
+
+      function tweakSpeakerView(win) {
+        var attempts = 0;
+        var poll = setInterval(function () {
+          attempts++;
+          if (attempts > 150) { clearInterval(poll); return; }
+          try {
+            var doc = win.document;
+            if (!doc) return;
+            var controls = doc.querySelector('#speaker-controls');
+            var timeBlock = doc.querySelector('.speaker-controls-time');
+            if (!controls || !timeBlock || doc.getElementById('gghf-speaker-tweaks')) return;
+            clearInterval(poll);
+
+            var style = doc.createElement('style');
+            style.id = 'gghf-speaker-tweaks';
+            style.textContent =
+              /* Timer épinglé, fond bleu nuit lisible quel que soit le thème */
+              '.speaker-controls-time {' +
+              '  position: -webkit-sticky; position: sticky; top: 0; z-index: 50;' +
+              '  background: #0F172A !important;' +
+              '  padding: 10px 12px 12px; margin-bottom: 10px;' +
+              '  border-radius: 10px;' +
+              '  border: 1px solid rgba(52, 211, 153, .35);' +
+              '  box-shadow: 0 6px 14px rgba(0,0,0,.35);' +
+              '}' +
+              '.speaker-controls-time .clock-value,' +
+              '.speaker-controls-time .timer span,' +
+              '.speaker-controls-time .timer-value,' +
+              '.speaker-controls-time .hours-value,' +
+              '.speaker-controls-time .minutes-value,' +
+              '.speaker-controls-time .seconds-value {' +
+              '  color: #34D399 !important;' +
+              '}' +
+              '.speaker-controls-time .label,' +
+              '.speaker-controls-time h4 {' +
+              '  color: #94A3B8 !important;' +
+              '}' +
+              /* Notes agrandies pour lecture à distance */
+              '.speaker-controls-notes .value {' +
+              '  font-size: 26px !important;' +
+              '  line-height: 1.55 !important;' +
+              '  color: inherit;' +
+              '}';
+            doc.head.appendChild(style);
+
+            // Clic dans la fenêtre orateur (hors timer, notes, liens et
+            // aperçus iframe, qui gèrent déjà leur propre clic) :
+            // moitié droite = avancer, moitié gauche = reculer.
+            doc.addEventListener('click', function (e) {
+              if (e.target.closest('a, button, input, textarea, select, iframe, .speaker-controls-time, .speaker-controls-notes')) return;
+              if (win.getSelection && String(win.getSelection())) return;
+              try {
+                if (e.clientX < win.innerWidth / 2) { Reveal.prev(); } else { Reveal.next(); }
+              } catch (err) {}
+            });
+
+            // Retour en haut des notes uniquement lors d'un vrai changement de
+            // slide : l'observateur se déclenche à chaque rafraîchissement des
+            // notes, mais on ne scrolle que si l'index h/v de la slide a changé
+            // (un fragment ne modifie que l'index f, donc il est ignoré).
+            var lastH = null, lastV = null;
+            var notesValue = doc.querySelector('.speaker-controls-notes .value');
+            if (notesValue) {
+              new win.MutationObserver(function () {
+                try {
+                  var idx = Reveal.getIndices();
+                  if (idx.h !== lastH || idx.v !== lastV) {
+                    lastH = idx.h;
+                    lastV = idx.v;
+                    controls.scrollTop = 0;
+                    notesValue.scrollTop = 0;
+                  }
+                } catch (e) {}
+              }).observe(notesValue, { childList: true, subtree: true, characterData: true });
+            }
+
+          } catch (e) { /* fenêtre pas encore prête */ }
+        }, 200);
+      }
+
+      // Filet de sécurité : même remise à zéro pilotée depuis la fenêtre
+      // principale, avec plusieurs tentatives pour absorber le délai de
+      // rafraîchissement de la vue orateur.
+      Reveal.on('slidechanged', function () {
+        if (!speakerWin || speakerWin.closed) return;
+        [50, 300, 800].forEach(function (delay) {
+          setTimeout(function () {
+            try {
+              var doc = speakerWin.document;
+              var controls = doc.querySelector('#speaker-controls');
+              var notesValue = doc.querySelector('.speaker-controls-notes .value');
+              if (controls) controls.scrollTop = 0;
+              if (notesValue) notesValue.scrollTop = 0;
+            } catch (e) {}
+          }, delay);
+        });
+      });
+    })();
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
