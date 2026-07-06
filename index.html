@@ -180,7 +180,13 @@
           </div>
         </div>
         <aside class="notes">
-          Bonjour à toutes et à tous, et merci de m'accueillir pour cette soutenance. Je m'appelle Thomas Querrec, je suis candidat au titre de Tech Lead, avec le bloc de compétences optionnel DEV. Je suis passionné de jeux vidéo depuis plus de dix ans, et c'est précisément cette passion qui est à l'origine du projet que je vais vous présenter pendant trente minutes : GGHF, pour "Good Game, Have Fun". GGHF est un médiateur intelligent entre les jeux et les joueurs : une plateforme d'onboarding et de micro-learning qui lutte contre l'attrition précoce, c'est-à-dire l'abandon d'un jeu dans les toutes premières heures. Mon plan suit la démarche du marathon DC Start, de l'idéation jusqu'à l'activation, en six temps : comprendre le problème, explorer le terrain, positionner l'offre, construire la solution — ce sera le cœur de cette soutenance, dix minutes dédiées à l'implémentation logicielle et à l'architecture, où je valoriserai ma spécialité Tech Lead et le bloc DEV —, activer le marché, et enfin me projeter. Le prototype est en ligne à l'adresse affichée — et je vous le présenterai en démonstration live au cœur de la partie technique. Commençons par le constat qui a tout déclenché.
+          <ul>
+          <li><strong>Se présenter :</strong> Thomas Querrec, candidat Tech Lead, bloc optionnel DEV, passionné de JV depuis 10+ ans</li>
+          <li><strong>GGHF</strong> = médiateur intelligent : onboarding + micro-learning contre l'attrition précoce (abandon dans les premières heures)</li>
+          <li><strong>Plan en 6 temps</strong> (démarche marathon DC Start) : comprendre → explorer → se positionner → construire (cœur tech, 10 min) → activer → se projeter</li>
+          <li>Prototype en ligne → <strong>démo live prévue</strong> dans la partie technique</li>
+          <li>→ Transition : le constat qui a tout déclenché</li>
+          </ul>
         </aside>
       </section>
 
@@ -209,7 +215,13 @@
           <span class="src">62&nbsp;% : sondage GGHF aupr&egrave;s de 250 joueurs — Note d&rsquo;intention (Sprint 1) &middot; 253,6 Mds $ (2023) &amp; 924 Mds $ (2032) : Fortune Business Insights, Gaming Market Report — repris dans l&rsquo;analyse sectorielle, Cahier des charges (Sprint 3) &middot; 38,3 M de joueurs FR : SELL, L&rsquo;Essentiel du Jeu Vid&eacute;o 2023 — repris dans l&rsquo;analyse PESTEL (Sprint 3)</span>
         </div>
         <aside class="notes">
-          Trois chiffres posent le décor. Premier chiffre : 62 %. C'est la proportion de nouveaux joueurs qui abandonnent un jeu dès les premières heures — non pas par manque d'intérêt, mais parce que les mécaniques sont trop complexes, l'aide trop dispersée et les contenus inadaptés à leur niveau. C'est ce qu'on appelle l'attrition précoce, et c'est l'ennemi que GGHF combat. Deuxième chiffre : 253,6 milliards de dollars. C'est la taille du marché mondial du jeu vidéo en 2023, avec une projection à 924 milliards en 2032. Chaque joueur perdu dans l'onboarding est donc une perte économique directe pour les éditeurs — ce qui ouvre d'ailleurs une opportunité B2B que je détaillerai dans la partie activation. Troisième chiffre : 38,3 millions de joueurs rien qu'en France. Cette audience s'est massivement diversifiée avec le mobile et le cloud gaming : elle ne ressemble plus au stéréotype du joueur expert, et elle exprime un besoin fort d'espaces d'apprentissage bienveillants, sans toxicité ni élitisme. De là découle ma problématique, qui a guidé toute la démarche : comment accompagner efficacement les nouveaux joueurs, avec une expérience personnalisée et engageante, tout en favorisant leur intégration dans la communauté ? Voyons la vision qui y répond.
+          <ul>
+          <li><strong>62 %</strong> : abandon dès les premières heures (mécaniques complexes, aide dispersée, contenus inadaptés) = attrition précoce, l'ennemi de GGHF</li>
+          <li><strong>253,6 Mds $</strong> (2023) → <strong>924 Mds $</strong> (2032) : chaque joueur perdu = perte économique → opportunité B2B (détaillée en partie activation)</li>
+          <li><strong>38,3 M joueurs FR</strong> : audience diversifiée (mobile, cloud), demande de bienveillance, fini le stéréotype du joueur expert</li>
+          <li><strong>Problématique :</strong> accompagner efficacement + expérience personnalisée + intégration communautaire</li>
+          <li>→ Transition : la vision qui y répond</li>
+          </ul>
         </aside>
       </section>
 
@@ -238,7 +250,14 @@
           </div>
         </div>
         <aside class="notes">
-          Face à ce constat, la vision de GGHF tient en une expression : être un médiateur intelligent entre les mécaniques complexes des jeux et le plaisir du joueur. Cette vision repose sur trois piliers. Premier pilier, la personnalisation : au lieu de proposer les mêmes tutoriels génériques à tout le monde, GGHF commence par profiler le joueur. Un questionnaire interactif analyse ses motivations — détente, progression ou compétition —, son rapport à la difficulté et sa façon d'apprendre, puis lui attribue un archétype de joueur qui conditionne toutes les recommandations. Deuxième pilier, le micro-learning : la cause numéro un de l'abandon, c'est la courbe d'apprentissage trop abrupte. Nous découpons donc chaque guide en étapes courtes, visuelles, avec une validation explicite et une barre de progression — le joueur voit qu'il avance, session après session. Troisième pilier, le Safe Space : les débutants fuient les communautés toxiques et élitistes. GGHF garantit nativement un environnement bienveillant, avec mentorat entre joueurs de niveau équivalent. Tout cela se condense dans notre promesse de marque : "Ne jouez plus par dépit, progressez par plaisir". Plutôt qu'un long discours, je vous propose maintenant de découvrir GGHF comme le découvriraient nos utilisateurs : à travers notre vidéo explainer d'une minute.
+          <ul>
+          <li><strong>GGHF = médiateur intelligent</strong> entre les mécaniques complexes et le plaisir du joueur</li>
+          <li><strong>1. Personnalisation :</strong> questionnaire (motivations, difficulté, façon d'apprendre) → archétype qui conditionne tout</li>
+          <li><strong>2. Micro-learning :</strong> étapes courtes validées + barre de progression — réponse à la courbe d'apprentissage abrupte (cause n°1 d'abandon)</li>
+          <li><strong>3. Safe Space :</strong> hub modéré, mentorat entre niveaux équivalents, zéro toxicité</li>
+          <li><strong>Promesse :</strong> « Ne jouez plus par dépit, progressez par plaisir »</li>
+          <li>→ Transition : découvrir GGHF comme un utilisateur → vidéo explainer (1 min)</li>
+          </ul>
         </aside>
       </section>
 
@@ -262,7 +281,13 @@
           <span class="src">Vid&eacute;o explainer GGHF — livrable communication cr&eacute;ative (dossier explainer) &middot; lecture de secours : drive.google.com/file/d/1aDschhCo0YjyFgwfKYEcJRObpKd772ie/view</span>
         </div>
         <aside class="notes">
-          Je lance maintenant la vidéo explainer — une minute. Avant de cliquer, une phrase de contexte : cette vidéo est notre premier outil de communication créative ; elle condense la promesse de GGHF dans le format court et percutant qu'attendent nos cibles, avec un storytelling simple — la frustration du joueur perdu, la révélation de son archétype, le plaisir retrouvé. C'est exactement le dispositif évalué dans la stratégie de communication : un message bref, compréhensible immédiatement par la cible, et décliné ensuite sur tous nos canaux, du TikTok d'Alex aux carrousels de Camille. [Lancer la vidéo — 60 secondes.] [Après la vidéo :] Voilà GGHF en une minute. Vous avez vu la mécanique narrative : on ne vend pas une base de données de guides, on vend une transformation — du rage quit à la progression par plaisir. Voyons maintenant comment cette vision s'est construite méthodiquement, étape par étape, en commençant par l'idéation et la recherche. Point technique de secours : si la vidéo ne se lance pas dans le support, elle est accessible directement via le lien affiché en bas de la diapositive, et une copie locale est prête sur le bureau.
+          <ul>
+          <li><strong>1 phrase de contexte :</strong> outil de communication créative — message bref + storytelling (frustration → révélation de l'archétype → plaisir retrouvé), décliné ensuite sur tous les canaux</li>
+          <li><strong>[LANCER LA VIDÉO — 60 s]</strong></li>
+          <li><strong>Après :</strong> on ne vend pas une base de guides, on vend une transformation — du rage quit à la progression par plaisir</li>
+          <li>Plan B : lien de secours sous la slide + copie locale sur ce PC</li>
+          <li>→ Transition : comment cette vision s'est construite, étape par étape — idéation &amp; recherche</li>
+          </ul>
         </aside>
       </section>
 
@@ -292,7 +317,14 @@
           <span class="src">Analyses PESTEL &amp; SWOT : rapport de recherche sectorielle (Sprint 1), consolid&eacute;es dans le Cahier des charges §1.4 (Sprint 3) &middot; +10&nbsp;% France 2023 &amp; 38,3 M de joueurs : SELL, L&rsquo;Essentiel du Jeu Vid&eacute;o 2023 &middot; 924 Mds $ (2032) : Fortune Business Insights, Gaming Market Report</span>
         </div>
         <aside class="notes">
-          La première phase du projet a été consacrée à l'idéation et au cadrage, en commençant par une recherche sectorielle rigoureuse. L'analyse PESTEL m'a permis de cartographier l'écosystème. Sur le plan politique, le jeu vidéo est désormais reconnu comme secteur culturel, avec un soutien institutionnel fort et une éligibilité potentielle au statut de Jeune Entreprise Innovante — un point que je réutilise dans le plan de financement. Sur le plan économique, le marché français a progressé de dix pour cent en 2023, porté par le jeu-service et les abonnements, qui amènent en continu de nouveaux joueurs à intégrer. Le facteur socioculturel est central pour nous : l'audience s'est diversifiée et exprime un besoin d'inclusion. Côté technologique, l'IA et les algorithmes de classification rendent enfin la personnalisation scalable — c'est le cœur technique de GGHF. Enfin, l'environnemental m'engage à l'éco-conception, et le légal impose le RGPD dès la conception, puisque nous manipulons des données comportementales. La synthèse SWOT croise ces éléments : nos forces sont un positionnement unique sur la personnalisation et un besoin validé par le terrain ; nos faiblesses, une notoriété à construire et une dépendance au contenu ; l'opportunité, un marché en croissance vers 924 milliards ; la menace, la concurrence indirecte de YouTube et Discord. Cette analyse théorique devait être confrontée au terrain : c'est l'objet de l'étude qualitative.
+          <ul>
+          <li><strong>Politique :</strong> secteur culturel reconnu, statut JEI possible (→ réutilisé au financement)</li>
+          <li><strong>Éco :</strong> +10 % France 2023, GaaS/abonnements = flux continu de nouveaux joueurs à intégrer</li>
+          <li><strong>Socioculturel (central) :</strong> diversification, besoin d'inclusion · <strong>Techno :</strong> IA = personnalisation enfin scalable · <strong>Légal :</strong> RGPD dès la conception · <strong>Env :</strong> éco-conception</li>
+          <li><strong>SWOT — Forces :</strong> positionnement unique, besoin validé terrain / <strong>Faiblesses :</strong> notoriété nulle, dépendance au contenu</li>
+          <li><strong>Opportunité :</strong> marché vers 924 Mds $ / <strong>Menaces :</strong> concurrence indirecte (YouTube, Discord), exigences UX</li>
+          <li>→ Transition : confronter la théorie au terrain = étude qualitative</li>
+          </ul>
         </aside>
       </section>
 
@@ -333,7 +365,15 @@
           <span class="src">Sondage en ligne GGHF men&eacute; aupr&egrave;s de 250 joueurs, amateurs et professionnels — Note d&rsquo;intention §3 (Sprint 1) &middot; Verbatims : entretiens utilisateurs de premi&egrave;re main (&eacute;tude qualitative, Sprint 1)</span>
         </div>
         <aside class="notes">
-          Pour objectiver le besoin, j'ai mené un sondage auprès de 250 joueurs, amateurs comme confirmés, complété par des entretiens de première main avec des débutants et des créateurs de contenu pédagogique. Trois résultats structurent tout le projet. Soixante-deux pour cent des nouveaux joueurs déclarent avoir abandonné un jeu dans les premières heures, faute d'en comprendre les mécanismes — c'est le chiffre d'attrition que vous avez vu en introduction, et il vient directement de ce terrain. Soixante-quinze pour cent souhaiteraient des outils pour découvrir plus rapidement leur style de jeu : c'est la validation directe du moteur de profilage par archétypes. Et quatre-vingt-cinq pour cent des joueurs réguliers estiment qu'une orientation claire et personnalisée dès le départ améliorerait la fidélité des nouveaux venus : le besoin est donc reconnu même par les joueurs expérimentés. Précision méthodologique si le jury le demande : ces trois pourcentages proviennent de notre propre sondage mené en phase d'idéation — j'assume qu'il s'agit d'une étude déclarative sur panel, c'est pourquoi l'objectif SMART parle bien de taux d'abandon "déclaré" ; les données de marché, elles, sont issues de l'analyse sectorielle consolidée dans le cahier des charges. Les sources sont rappelées en bas de chaque diapositive chiffrée. Les verbatims sont éloquents — je vous en cite deux : "Quand j'ai commencé, je ne savais pas quel personnage choisir et j'ai fini par quitter le jeu, frustré", et "Un guide adapté à mon style de jeu aurait vraiment fait la différence". Les entretiens ont aussi fait remonter deux irritants récurrents : la toxicité des communautés et la difficulté d'accès aux guides existants. Pour transformer ces données en décisions produit, je les ai incarnées dans deux personas de référence.
+          <ul>
+          <li><strong>Méthode :</strong> sondage 250 joueurs (amateurs + confirmés) + entretiens de première main</li>
+          <li><strong>62 %</strong> ont abandonné faute de comprendre les mécanismes → source du chiffre d'intro</li>
+          <li><strong>75 %</strong> veulent des outils pour trouver leur style → valide le moteur de profilage</li>
+          <li><strong>85 %</strong> des réguliers : orientation personnalisée = meilleure fidélité → besoin reconnu même par les expérimentés</li>
+          <li><strong>Verbatims :</strong> « je ne savais pas quel personnage choisir… frustré » / « un guide adapté aurait fait la différence »</li>
+          <li><strong>Si question jury :</strong> données déclaratives sur panel — cohérent avec l'objectif SMART « abandon déclaré » ; irritants récurrents : toxicité + guides inaccessibles</li>
+          <li>→ Transition : incarner ces données → 2 personas</li>
+          </ul>
         </aside>
       </section>
 
@@ -401,7 +441,16 @@
           <span class="src">Fiches personas (profils, traits de personnalit&eacute;, frustrations / attentes) : boards personas — dossier ressources du Drive &amp; Note d&rsquo;intention (Sprint 1), enrichis par la Strat&eacute;gie marketing §2.3 (Sprint 4)</span>
         </div>
         <aside class="notes">
-          Voici les deux personas qui ont servi de boussole à toutes mes décisions — produit, techniques et marketing. À gauche, Alex, dix-huit ans, le Débutant Curieux. C'est un étudiant au budget limité, joueur mobile et PC, au rythme quotidien chargé : il fait des visites courtes mais très fréquentes. Il veut de l'efficacité immédiate : des guides ultra-ciblés, à jour, qui lui permettent de franchir des paliers compétitifs sans perdre de temps. Il rejette massivement les guides trop longs, mal structurés ou génériques. Ce qu'il attend de GGHF, c'est une personnalisation algorithmique stricte, servie dans des formats de micro-learning courts. À droite, Camille, vingt-sept ans, la Joueuse Détente. Chargée de communication avec un pouvoir d'achat plus élevé, elle joue pour s'immerger et se détendre après le travail. Elle souffre de surcharge cognitive face aux jeux complexes et rejette l'élitisme, le jargon et la toxicité. Ce qu'elle attend de GGHF, c'est un environnement sain, des recommandations variées et narratives, et la valorisation des contributions communautaires. Retenez cette dualité : Alex cherche la performance rapide, Camille cherche la sérénité profonde. Vous verrez qu'elle structure toute la suite : la proposition de valeur, les choix d'architecture — rendu SSR pour le référencement versus interactivité du dashboard — et la stratégie d'acquisition. Passons justement à l'exploration du marché.
+          <ul>
+          <li><strong>Alex, 18 ans — Débutant Curieux :</strong> étudiant, budget limité, mobile/PC, visites courtes très fréquentes</li>
+          <li>Veut : efficacité immédiate, guides ciblés et à jour, builds méta · Rejette : guides longs, obsolètes, génériques</li>
+          <li>Attente GGHF : personnalisation algorithmique stricte + micro-learning court</li>
+          <li><strong>Camille, 27 ans — Joueuse Détente :</strong> chargée de comm, CSP+, sessions longues et posées après le travail</li>
+          <li>Veut : comprendre en profondeur, sans pression · Rejette : élitisme, jargon, toxicité</li>
+          <li>Attente GGHF : Safe Space narratif, contributions communautaires valorisées</li>
+          <li><strong>Dualité clé</strong> (performance rapide vs sérénité profonde) → structure le VPC, l'archi (SSR vs CSR) et l'acquisition</li>
+          <li>→ Transition : exploration du marché</li>
+          </ul>
         </aside>
       </section>
 
@@ -428,7 +477,16 @@
           </div>
         </div>
         <aside class="notes">
-          Deuxième temps fort de la démarche : l'exploration concurrentielle et la formalisation de la proposition de valeur. Le benchmark révèle un marché de l'accompagnement polarisé entre deux extrêmes. D'un côté, les plateformes de diffusion de masse. YouTube et Twitch offrent une accessibilité totale et un volume de contenu éducatif énorme, mais le message implicite est "tout est là, débrouille-toi" : c'est générique, passif, sans aucune structure guidée pour un débutant. GameFAQs et les wikis sont exhaustifs, mais rébarbatifs, purement textuels et sans onboarding. De l'autre côté, le coaching humain payant, comme GamerSensei ou Metafy : la personnalisation est maximale, mais le coût est prohibitif et la posture élitiste est intimidante pour un débutant qui craint justement le jugement. Entre les deux, Discord et les forums offrent réactivité et sentiment d'appartenance, mais avec une image de toxicité et de gatekeeping qui fait fuir exactement les profils que nous ciblons. Le key learning est limpide : aucun acteur ne combine l'accessibilité du gratuit et une personnalisation réelle. Chaque concurrent m'a d'ailleurs appris quelque chose : de YouTube je retiens la puissance du référencement, de GamerSensei la valorisation de l'expertise, de Discord la force communautaire — en rejetant à chaque fois leur faiblesse. Le mapping suivant visualise cet espace vacant.
+          <ul>
+          <li><strong>Marché polarisé</strong> entre diffusion de masse et coaching payant</li>
+          <li><strong>YouTube/Twitch :</strong> accessible, exhaustif — mais générique, passif, « tout est là, débrouille-toi »</li>
+          <li><strong>GameFAQs/wikis :</strong> complets — mais rébarbatifs, zéro personnalisation, pas d'onboarding</li>
+          <li><strong>GamerSensei/Metafy :</strong> personnalisation max — mais prohibitif + posture intimidante pour un débutant</li>
+          <li><strong>Discord/forums :</strong> réactifs, appartenance — mais toxicité et gatekeeping = fuite de nos cibles</li>
+          <li><strong>Key learnings :</strong> garder le SEO (YouTube), l'expertise (Sensei), la communauté (Discord) — rejeter leurs faiblesses</li>
+          <li><strong>Conclusion :</strong> personne ne combine accessibilité gratuite + personnalisation réelle → espace vacant</li>
+          <li>→ Transition : le mapping le visualise</li>
+          </ul>
         </aside>
       </section>
 
@@ -470,7 +528,14 @@
           </div>
         </div>
         <aside class="notes">
-          Ce mapping croise les deux dimensions discriminantes du marché : en abscisse, l'accessibilité — c'est-à-dire le coût et la facilité d'accès —, en ordonnée, le niveau de personnalisation. La lecture est immédiate. En bas à droite, YouTube et GameFAQs : très accessibles, gratuits, mais quasiment aucune personnalisation — le contenu est identique pour tous. En haut à gauche, GamerSensei : personnalisation maximale grâce au coach humain, mais une accessibilité écrasée par le prix. Discord flotte au milieu, sans structure pédagogique. Le quadrant supérieur droit — accessibilité forte ET personnalisation forte — est vide. C'est précisément là que GGHF se positionne, et c'est possible pour une raison technologique : la personnalisation algorithmique. Contrairement au coach humain, un moteur de recommandation basé sur des archétypes a un coût marginal quasi nul par utilisateur supplémentaire : la personnalisation devient scalable, donc compatible avec un modèle freemium accessible. C'est l'intuition fondatrice du projet, et c'est elle qui justifiera l'investissement technique dans le moteur de scoring — le cœur de la valeur. Avant cela, il fallait valider formellement l'adéquation entre ce positionnement et les besoins des personas : c'est le rôle du Value Proposition Canvas.
+          <ul>
+          <li><strong>Axes :</strong> accessibilité/coût (x) × personnalisation (y)</li>
+          <li>Bas-droite : YouTube, GameFAQs (accessibles mais génériques) · Haut-gauche : GamerSensei (perso mais cher) · Discord au milieu, sans structure pédagogique</li>
+          <li><strong>Quadrant haut-droit vide → position GGHF</strong></li>
+          <li><strong>Pourquoi c'est possible :</strong> personnalisation algorithmique = coût marginal quasi nul par utilisateur → scalable → compatible freemium</li>
+          <li>Intuition fondatrice du projet → justifiera l'investissement R&amp;D dans le moteur de scoring</li>
+          <li>→ Transition : valider l'adéquation besoin/solution = Value Proposition Canvas</li>
+          </ul>
         </aside>
       </section>
 
@@ -504,7 +569,14 @@
           </div>
         </div>
         <aside class="notes">
-          Le Value Proposition Canvas formalise l'ajustement entre le profil de nos clients et notre carte de valeur. À gauche, le profil client, issu directement de l'étude qualitative. Les jobs à accomplir : être guidé dans un univers vidéoludique vaste et déroutant, découvrir des jeux qui correspondent à ses préférences, disposer d'un parcours d'apprentissage structuré et gratifiant. Les douleurs : difficulté à identifier un contenu adapté à son profil, tutoriels génériques et peu engageants, frustration d'une courbe d'apprentissage trop abrupte, temps perdu à chercher. Les gains recherchés : une découverte rapide, une montée en compétence progressive, et surtout un sentiment de plaisir dès les premières sessions. À droite, la carte de valeur GGHF répond point par point. Le moteur de profilage — quiz plus algorithme de scoring — élimine la recherche à l'aveugle en attribuant un archétype. Les recommandations "Best Match" filtrent le catalogue selon ce profil : fini le contenu générique. Les parcours gamifiés en micro-learning, avec feedbacks réguliers et récompenses, adoucissent la courbe d'apprentissage et entretiennent la motivation. Et le hub communautaire modéré, avec mentorat par affinité, répond à la peur du jugement. La synthèse stratégique tient en trois piliers : personnalisation, accessibilité, motivation. Ce canevas validé, restait à le transformer en logiciel réel. Nous entrons maintenant dans le cœur technique de cette soutenance : la construction de la solution.
+          <ul>
+          <li><strong>Profil client</strong> (issu du terrain) — jobs : être guidé, découvrir des jeux adaptés, parcours structuré et gratifiant</li>
+          <li><strong>Pains :</strong> contenu inadapté au profil, tutoriels génériques, courbe abrupte, temps perdu</li>
+          <li><strong>Gains :</strong> découverte rapide, montée en compétence progressive, plaisir dès les premières sessions</li>
+          <li><strong>Carte de valeur — réponse point par point :</strong> profilage (quiz + scoring → archétype) / Best Match filtré / parcours gamifiés micro-learning / hub modéré avec mentorat</li>
+          <li><strong>3 piliers :</strong> personnalisation · accessibilité · motivation</li>
+          <li>→ Transition : transformer le canevas en logiciel réel = cœur technique de la soutenance (10 min)</li>
+          </ul>
         </aside>
       </section>
 
@@ -541,7 +613,15 @@
           <span class="src">Objectifs &minus;15&nbsp;% d&rsquo;abandon, Lighthouse &gt;&nbsp;90/100, MVP 10 semaines : objectifs SMART — Cahier des charges §1.2 (Sprint 3) &middot; Fonctionnalit&eacute;s A&ndash;D : Cahier des charges §2.2 &laquo; Fonctionnalit&eacute;s cl&eacute;s et userflows &raquo;</span>
         </div>
         <aside class="notes">
-          Nous voici dans le cœur de ma spécialité Tech Lead — j'y consacrerai dix minutes. Tout part d'un cahier des charges avec des objectifs SMART. Spécifique : concevoir une plateforme capable de profiler un utilisateur via un algorithme de scoring et de lui recommander des parcours adaptés. Mesurable, avec deux indicateurs chiffrés : réduire de quinze pour cent le taux d'abandon déclaré sur notre panel de testeurs, et garantir un score Lighthouse supérieur à quatre-vingt-dix — la performance technique est un engagement produit, pas un luxe. Atteignable et réaliste : le MVP est volontairement limité à trois genres majeurs — MOBA, FPS, RPG — pour valider la pertinence du moteur avant d'élargir. Temporel : dix semaines de réalisation. Fonctionnellement, la solution se décompose en quatre briques, chacune répondant à une frustration identifiée chez les personas. La brique A, le moteur de profilage : dix questions sur les motivations, un calcul de scoring en temps réel sur trois vecteurs — technicité, social, temps disponible — et un archétype restitué immédiatement. La brique B, la recommandation prédictive : le catalogue est filtré par l'archétype pour afficher en priorité les guides "Best Match" — le gain de temps qu'attend Camille. La brique C, le micro-learning : chaque guide est découpé en étapes courtes avec validation explicite — la réponse à la courbe d'apprentissage abrupte. La brique D, le hub communautaire bienveillant avec mentorat. Ces quatre briques ne sont pas un concept sur papier : elles sont en ligne. Je vous propose de les voir fonctionner en direct.
+          <ul>
+          <li><strong>Annonce :</strong> cœur de la spécialité Tech Lead — 10 minutes</li>
+          <li><strong>SMART :</strong> profiler + recommander (S) · −15 % d'abandon déclaré sur panel 30 testeurs + Lighthouse &gt; 90 (M) · MVP limité à 3 genres MOBA/FPS/RPG (A-R) · 10 semaines (T)</li>
+          <li><strong>A — Profilage :</strong> 10 questions → scoring temps réel (technicité / social / temps) → archétype immédiat</li>
+          <li><strong>B — Best Match :</strong> catalogue filtré par UUID d'archétype → gain de temps (Camille)</li>
+          <li><strong>C — Micro-learning :</strong> étapes + « J'ai compris » + progression → attaque la cause n°1 d'abandon</li>
+          <li><strong>D — Hub communautaire :</strong> mentorat, modération Safe Space</li>
+          <li>→ Transition : pas un concept sur papier, c'est en ligne → démo live</li>
+          </ul>
         </aside>
       </section>
 
@@ -580,7 +660,16 @@
           <span class="src">Prototype V2 d&eacute;ploy&eacute; sur Vercel — livrable Prototype &amp; identit&eacute; visuelle (Sprint 3) &middot; dc-start-gghf.vercel.app</span>
         </div>
         <aside class="notes">
-          Voici le prototype, en ligne et fonctionnel — je bascule sur l'onglet dédié pour la démonstration, environ deux minutes, en suivant le parcours d'Alex. Un : la landing page — la promesse est immédiatement lisible, avec un seul appel à l'action en orange, "Découvrir mon profil de joueur" ; c'est l'application directe de la règle des trois clics et de la sobriété visuelle du Safe Space. Deux : le quiz d'onboarding — douze questions sur les motivations, le rapport à la difficulté et le temps disponible, avec un feedback visuel immédiat à chaque réponse ; vous vous souvenez de la rétrospective V1/V2 : ce quiz a été raccourci précisément parce que les premiers testeurs le trouvaient trop long. Trois : la révélation de l'archétype — la carte d'identité de joueur, l'élément qui transforme un test en moment valorisant ; c'est la Big Idea "Le Code de Votre Progrès" incarnée dans le produit. Quatre : le dashboard — les recommandations "Best Match" filtrées par l'archétype obtenu, les barres de progression en vert menthe, et l'accès aux guides en micro-learning découpés en étapes validables. Pendant que je navigue, notez la cohérence de la direction artistique avec ce support de soutenance : même fond sombre, mêmes accents menthe et orange — c'est un écosystème de marque unique. Conseil logistique pour moi-même : l'onglet du prototype est ouvert et connecté avant la soutenance, et en cas de panne réseau, la copie locale tourne sur cette machine avec npm run dev. [Revenir au support.] Vous avez vu le produit fonctionner ; voyons maintenant l'architecture qui porte tout cela.
+          <ul>
+          <li><strong>[BASCULER SUR L'ONGLET PROTOTYPE — ~2 min — parcours d'Alex]</strong></li>
+          <li><strong>1. Landing :</strong> promesse lisible, un seul CTA orange — règle des 3 clics, sobriété Safe Space</li>
+          <li><strong>2. Quiz :</strong> 12 questions, feedback visuel immédiat — raccourci suite aux tests V1 (démarche itérative)</li>
+          <li><strong>3. Archétype :</strong> carte d'identité de joueur = moment valorisant, Big Idea incarnée</li>
+          <li><strong>4. Dashboard :</strong> Best Match filtré, barres de progression menthe, guides en étapes validables</li>
+          <li>Souligner la <strong>cohérence DA</strong> prototype ↔ support (dark, menthe, orange) = écosystème de marque unique</li>
+          <li>Plans B : onglet pré-ouvert avant la soutenance · copie locale (npm run dev)</li>
+          <li>→ Transition : [revenir au support] l'architecture qui porte tout cela</li>
+          </ul>
         </aside>
       </section>
 
@@ -635,7 +724,15 @@
           </div>
         </div>
         <aside class="notes">
-          Voici l'architecture cible, dont le premier critère de choix a été l'évolutivité — c'est le fil rouge de toutes mes décisions d'architecte. J'ai retenu une architecture headless, découplant strictement le frontend du backend. Le frontend est une application Next.js 15, déployée sur Vercel. Le backend est une API Symfony 7 exposée via API Platform. Les deux communiquent en JSON-LD, sécurisés par des jetons JWT. Pourquoi ce découplage ? Trois raisons. Un : la maintenance isolée — je peux faire évoluer le moteur de recommandation sans toucher à l'interface, et inversement. Deux : la scalabilité horizontale — chaque étage se dimensionne indépendamment selon la charge. Trois, et c'est le plus stratégique : le backend devient un fournisseur de données universel, capable d'alimenter demain une application mobile native ou une intégration in-game, sans réécriture — ce qui répond au marché multi-support identifié lors de la recherche sectorielle. Sur la persistance, PostgreSQL avec le type JSONB pour les profils de joueurs — j'y reviens dans deux slides. Redis assure la mise en cache des réponses API, notamment celles de l'API externe IGDB, l'Internet Game Database, qui nous fournit les métadonnées de jeux. Enfin, le socle transverse : Docker garantit la parité des environnements entre développement, préproduction et production, et GitHub Actions orchestre l'intégration et le déploiement continus, avec un objectif de disponibilité de 99,9 %. Détaillons maintenant la justification de chaque brique.
+          <ul>
+          <li><strong>Fil rouge des choix : l'évolutivité</strong></li>
+          <li><strong>Headless :</strong> front Next.js 15 (Vercel) ⇄ JSON-LD + JWT ⇄ back Symfony 7 / API Platform</li>
+          <li><strong>3 raisons :</strong> maintenance isolée · scalabilité horizontale par étage · backend = fournisseur universel (app mobile, in-game demain, sans réécriture)</li>
+          <li><strong>Persistance :</strong> PostgreSQL + JSONB (profils) · Redis = cache API (dont IGDB)</li>
+          <li><strong>IGDB :</strong> métadonnées de jeux consommées et mises en cache — on ne reconstruit pas l'encyclopédie</li>
+          <li><strong>Socle :</strong> Docker (parité des environnements) + GitHub Actions (CI/CD) + uptime cible 99,9 %</li>
+          <li>→ Transition : justification brique par brique</li>
+          </ul>
         </aside>
       </section>
 
@@ -664,7 +761,14 @@
           </div>
         </div>
         <aside class="notes">
-          En tant que Tech Lead, je considère qu'un choix technologique ne se justifie jamais par la mode, mais par un besoin métier traçable. Next.js 15, d'abord, pour son rendu hybride. Les pages de guides sont rendues côté serveur, en SSR : elles sont donc parfaitement indexables par les moteurs de recherche — c'est fondamental, car le SEO est le canal d'acquisition principal de Camille, qui tape "comment débuter sur" suivi du nom d'un jeu. À l'inverse, le dashboard utilisateur est rendu côté client, en CSR : l'interactivité est fluide, sans rechargement de page — exactement ce qu'exige Alex, qui abandonne à la première friction. Symfony 7 avec API Platform ensuite : Symfony apporte une sécurité native contre les attaques XSS et CSRF, une politique CSP, et une structure rigoureuse par injection de dépendances qui rend le code testable. API Platform expose nos ressources en JSON-LD, un format standardisé qui facilite l'interopérabilité future avec les API de Steam ou de Riot pour enrichir le profilage. PostgreSQL avec JSONB : c'est un choix dont je suis particulièrement satisfait. Nos profils de joueurs sont des données semi-structurées — les scores d'archétypes évoluent à chaque itération de l'algorithme. Le type JSONB les stocke en binaire indexé, avec la robustesse du relationnel pour les comptes, sans imposer une migration de schéma à chaque ajustement du scoring. Enfin l'API IGDB : nous consommons l'index mondial des jeux plutôt que de le reconstruire, avec un cache Redis pour maîtriser la latence et les quotas. Voyons comment ces données s'organisent.
+          <ul>
+          <li><strong>Principe :</strong> un choix techno se justifie par un besoin métier traçable, jamais par la mode</li>
+          <li><strong>Next.js 15 :</strong> SSR sur les guides → indexation SEO (canal d'acquisition de Camille) · CSR sur le dashboard → fluidité sans rechargement (exigence d'Alex)</li>
+          <li><strong>Symfony 7 :</strong> sécurité native (XSS, CSRF, CSP), injection de dépendances → code testable · <strong>API Platform :</strong> JSON-LD standard, interopérable (Steam/Riot demain)</li>
+          <li><strong>PostgreSQL JSONB :</strong> scores d'archétypes évolutifs stockés en binaire indexé → l'algo itère sans migration de schéma ; relationnel pour les comptes</li>
+          <li><strong>IGDB + cache Redis :</strong> latence et quotas maîtrisés</li>
+          <li>→ Transition : comment ces données s'organisent</li>
+          </ul>
         </aside>
       </section>
 
@@ -713,7 +817,14 @@
           </div>
         </div>
         <aside class="notes">
-          Voici la modélisation de la base de données, pensée selon un principe simple : du relationnel strict partout où l'intégrité compte, du JSONB partout où la structure doit évoluer. Au centre du modèle, l'utilisateur — identifié par un UUID et non par des données nominatives : c'est la pseudonymisation exigée par le RGPD, appliquée dès la conception, "privacy by design". Chaque utilisateur possède un profil joueur en relation un-à-un, qui porte le champ le plus stratégique du schéma : les scores, stockés en JSONB. Ce document contient les poids des trois vecteurs de motivation — technicité, social, temps. Quand le data scientist rééquilibre l'algorithme et ajoute une dimension, on enrichit le document JSON, sans migration de schéma, sans interruption de service. Le profil pointe vers un archétype, qui porte lui-même ses pondérations en JSONB. Côté contenu : la table game référence l'identifiant IGDB et met en cache les métadonnées pour limiter les appels externes ; chaque guide est rattaché à un jeu et à des archétypes compatibles — c'est la clé du "Best Match" ; chaque guide se décompose en étapes ordonnées — la granularité du micro-learning. Enfin, la table progression croise utilisateur et étape : c'est elle qui alimente les barres de progression à l'écran, mais aussi nos KPI de rétention, et demain les rapports d'onboarding B2B vendus aux studios. Une même donnée sert donc l'expérience, le pilotage et le business model. Passons à la qualité logicielle.
+          <ul>
+          <li><strong>Principe :</strong> relationnel strict où l'intégrité compte, JSONB où la structure évolue</li>
+          <li><strong>user :</strong> UUID, pas de données nominatives = pseudonymisation RGPD, privacy by design</li>
+          <li><strong>player_profile (1–1) :</strong> scores JSONB (3 vecteurs) → le data scientist enrichit l'algo sans migration ni interruption</li>
+          <li><strong>game :</strong> igdb_id + métadonnées en cache · <strong>guide → steps</strong> ordonnées = granularité du micro-learning · archetype_match = clé du Best Match</li>
+          <li><strong>progression (user × step) :</strong> alimente les barres UI + les KPI de rétention + demain les rapports B2B — une même donnée, trois usages</li>
+          <li>→ Transition : la qualité logicielle</li>
+          </ul>
         </aside>
       </section>
 
@@ -756,7 +867,14 @@
           </div>
         </div>
         <aside class="notes">
-          La qualité logicielle n'est pas un sujet cosmétique pour GGHF : notre promesse produit, c'est de retenir des utilisateurs volatils — un bug sur l'onboarding, et le joueur qu'on devait sauver de l'abandon nous abandonne, nous. J'ai donc structuré la qualité sur trois niveaux. Premier niveau, les normes et l'outillage : côté frontend, ESLint et Prettier imposent l'analyse statique et le formatage ; côté backend, PHPStan pour l'analyse statique du PHP et PHP-CS-Fixer pour le style. Ces contrôles sont bloquants dès le pre-commit : un code non conforme ne peut tout simplement pas entrer dans l'historique. Les nomenclatures sont univoques et homogènes, comme l'exige le référentiel. Deuxième niveau, la revue de code : un flux Git par branches, chaque évolution passe par une Pull Request revue systématiquement par le Tech Lead avant intégration. La traçabilité suit la règle "une anomalie égale un ticket" dans Jira, et la connaissance est documentée en continu sur Notion — le savoir ne vit pas que dans les têtes. Troisième niveau, la stratégie de tests, organisée en pyramide. À la base, les tests unitaires avec Jest côté React et PHPUnit côté Symfony — avec une doctrine ferme : l'algorithme de scoring, cœur de la valeur, est couvert à cent pour cent ; il ne peut pas régresser silencieusement. Au milieu, les tests d'intégration valident les contrats de l'API. Au sommet, les tests end-to-end avec Cypress rejouent les parcours critiques réels, en premier lieu l'onboarding complet : questionnaire, archétype, première recommandation. Cette pyramide s'exécute automatiquement à chaque poussée de code — c'est le pipeline que voici.
+          <ul>
+          <li><strong>Enjeu :</strong> un bug sur l'onboarding = le joueur qu'on devait sauver de l'abandon nous abandonne</li>
+          <li><strong>Normes :</strong> ESLint + Prettier (front) · PHPStan + PHP-CS-Fixer (back) · bloquants dès le pre-commit · nomenclatures univoques</li>
+          <li><strong>Code review :</strong> branches + PR, revue systématique par le Tech Lead, 1 anomalie = 1 ticket (Jira), doc continue sur Notion</li>
+          <li><strong>Pyramide :</strong> unitaires Jest/PHPUnit (base) → intégration API (contrats) → E2E Cypress (parcours onboarding complet)</li>
+          <li><strong>Doctrine :</strong> l'algorithme de scoring couvert à 100 % — le cœur de la valeur ne régresse jamais silencieusement</li>
+          <li>→ Transition : cette pyramide s'exécute à chaque push → le pipeline</li>
+          </ul>
         </aside>
       </section>
 
@@ -787,7 +905,13 @@
           </div>
         </div>
         <aside class="notes">
-          Voici le workflow d'intégration et de déploiement continus, orchestré par GitHub Actions. Chaque poussée de code ou Pull Request déclenche la même séquence, sans exception. D'abord le lint et l'analyse statique — ESLint et PHPStan — qui rejettent immédiatement le code non conforme. Ensuite la suite de tests complète : unitaires avec Jest et PHPUnit, intégration sur l'API, et end-to-end avec Cypress sur les parcours critiques. Si tout est vert, le pipeline construit les images Docker versionnées — le même artefact traverse tous les environnements, c'est la garantie de parité : ce qui a été testé est exactement ce qui est déployé, on élimine structurellement le "ça marche sur ma machine". Le déploiement est ensuite automatique : le frontend sur Vercel, l'API en conteneurs. Et le pipeline ne s'arrête pas à la mise en ligne : Lighthouse et Vercel Analytics surveillent en continu la performance — rappelez-vous notre engagement d'un score supérieur à quatre-vingt-dix et d'un LCP sous 1,2 seconde sur les pages critiques. Trois principes gouvernent ce dispositif. Un : aucun merge sans pipeline vert — les tests automatisés sont le contrat d'équipe, pas une option. Deux : la parité d'environnements par Docker. Trois : l'automatisation ne remplace pas la validation humaine — les livraisons passent par la préproduction, sont recettées par le panel de bêta-testeurs, et la mise en production n'est déclenchée qu'après signature du procès-verbal de recette. Ce cadre étant posé, un Tech Lead doit aussi anticiper ce qui peut mal tourner : les risques techniques.
+          <ul>
+          <li><strong>Séquence à chaque push/PR :</strong> lint &amp; analyse statique → tests (Jest, PHPUnit, Cypress) → build images Docker versionnées → déploiement auto (Vercel + conteneurs) → monitoring (Lighthouse, LCP &lt; 1,2 s)</li>
+          <li><strong>Principe 1 :</strong> aucun merge sans pipeline vert — les tests sont le contrat d'équipe</li>
+          <li><strong>Principe 2 :</strong> parité d'environnements par Docker — ce qui est testé = ce qui est déployé</li>
+          <li><strong>Principe 3 :</strong> l'automatisation ne remplace pas la validation humaine — préprod → panel bêta → PV de recette signé → MEP</li>
+          <li>→ Transition : un Tech Lead anticipe aussi ce qui peut mal tourner → les risques</li>
+          </ul>
         </aside>
       </section>
 
@@ -849,7 +973,15 @@
           </div>
         </div>
         <aside class="notes">
-          Un radar de risques croisant probabilité et impact m'a permis de prioriser quatre risques majeurs, chacun doté d'un signal d'alerte mesurable et d'une action corrective prédéfinie — on ne réfléchit pas à la solution pendant l'incident, on l'exécute. Premier risque, le plus structurel : l'instabilité de l'API tierce IGDB, dont nous dépendons pour les métadonnées de jeux. Signal : erreurs fréquentes ou latence anormale. Réponse : le cache Redis sert les données déjà connues, un mode dégradé maintient le service, et surtout une couche d'abstraction isole IGDB derrière une interface — si le fournisseur devient défaillant, on le remplace sans réécrire le métier. Deuxième risque : la surcharge serveur en cas de pic — c'est précisément pour cela que l'architecture découplée permet la scalabilité horizontale. Troisième risque : la non-conformité RGPD, traitée à la racine par la pseudonymisation UUID et la minimisation des données collectées. Quatrième : le désengagement des usagers, adressé par l'itération UX continue avec le panel. Sur la dette technique, ma position de Tech Lead est claire : la dette n'est pas un échec, c'est un emprunt — à condition de le tracer et de le rembourser. Elle est arbitrée chaque semaine en comité technique, chaque dette identifiée devient un ticket, et un budget de refactoring est sanctuarisé dans chaque sprint. Enfin, la résolution de bogues suit une méthode systématique : analyse causale, reproduction du bug par un test qui échoue, correctif, puis intégration de ce test au pipeline — un bug corrigé ne peut ainsi jamais réapparaître silencieusement. Le produit est solide ; reste à le faire exister sur le marché : c'est la phase d'activation.
+          <ul>
+          <li><strong>Radar probabilité × impact</strong> → 4 risques priorisés : signal d'alerte mesurable + action corrective prédéfinie (on exécute, on ne réfléchit pas pendant l'incident)</li>
+          <li><strong>API IGDB (le plus structurel) :</strong> cache Redis + mode dégradé + couche d'abstraction → fournisseur remplaçable sans réécrire le métier</li>
+          <li><strong>Surcharge serveur :</strong> scalabilité horizontale (bénéfice direct du découplage)</li>
+          <li><strong>RGPD :</strong> pseudonymisation UUID + minimisation · <strong>Désengagement :</strong> itérations UX avec le panel</li>
+          <li><strong>Dette technique = un emprunt</strong> tracé et remboursé : arbitrage COTECH hebdo, dette → ticket, budget refactoring sanctuarisé chaque sprint</li>
+          <li><strong>Bogues (C7.3) :</strong> analyse causale → reproduction par un test qui échoue → correctif → test de non-régression intégré au pipeline</li>
+          <li>→ Transition : produit solide, reste à le faire exister = activation</li>
+          </ul>
         </aside>
       </section>
 
@@ -883,7 +1015,14 @@
           <span class="src">Prix 4,99&nbsp;&euro;/mois, rapports B2B 1&nbsp;500&nbsp;&euro;, affiliation 5&nbsp;% : Business plan §3 (Sprint 3) &middot; 4P &amp; canaux : Strat&eacute;gie marketing §5 (Sprint 4) &middot; Budget com d&eacute;taill&eacute; &amp; objectifs canaux (50 000 impressions/mois, 1 000 tests d&rsquo;arch&eacute;type/mois, 100 adh&eacute;sions Discord/mois) : Strat&eacute;gie de communication §5.3 &amp; §6.1 (Sprint 4)</span>
         </div>
         <aside class="notes">
-          Dernière ligne droite : transformer le produit en projet de marché. Le marketing mix s'articule autour des quatre P. Le Produit d'abord : GGHF ne se vend pas comme une base de guides, mais comme une expérience de médiation complète — le moteur de profilage, le micro-learning et un design system pensé comme un espace rassurant. Le lancement est freemium, concentré sur les trois genres majeurs du MVP. Le Prix : une stratégie hybride. Côté B2C, l'accès gratuit abaisse la barrière d'entrée pour capter les débutants, et l'abonnement Premium à quatre euros quatre-vingt-dix-neuf par mois — un prix psychologique — débloque le suivi de progression avancé et les parcours experts. Côté B2B, nous monétisons la donnée d'onboarding : des rapports d'analyse des points de friction vendus mille cinq cents euros aux studios, plus une commission d'affiliation de cinq pour cent sur les jeux recommandés. La Place : une distribution cent pour cent numérique, web responsive sur Vercel, sans téléchargement — et l'architecture headless présentée au cœur technique rend l'extension mobile native possible sans réécriture : vous voyez la cohérence entre choix techniques et stratégie de distribution. La Promotion, enfin, est calquée sur les personas : le SEO capte Camille sur ses recherches Google, les formats courts TikTok et les serveurs Discord captent Alex, LinkedIn et les salons adressent les studios. Le tout est unifié par notre Big Idea créative, "Le Code de Votre Progrès" : transformer le profilage technique en quête de découverte de soi — "Et si votre plus grand obstacle en jeu était de ne pas connaître votre propre force ?". Voyons le plan d'activation et les chiffres.
+          <ul>
+          <li><strong>Produit :</strong> expérience de médiation complète (profilage + micro-learning + design Safe Space), freemium sur 3 genres</li>
+          <li><strong>Prix :</strong> B2C gratuit + Premium 4,99 €/mois (prix psychologique) · B2B rapports d'onboarding 1 500 € + affiliation 5 %</li>
+          <li><strong>Place :</strong> 100 % web sur Vercel, sans téléchargement · headless → extension mobile native possible (cohérence choix tech ↔ distribution)</li>
+          <li><strong>Promotion :</strong> SEO (Camille) · TikTok/Discord (Alex) · LinkedIn/salons (B2B) · budget com 10 k€</li>
+          <li><strong>Big Idea :</strong> « Le Code de Votre Progrès » — le profilage devient une quête de découverte de soi</li>
+          <li>→ Transition : zoom sur le plan de communication</li>
+          </ul>
         </aside>
       </section>
 
@@ -952,7 +1091,14 @@
           <span class="src">Campagne &laquo; Unleash Your Archetype &raquo;, calendrier &eacute;ditorial &amp; budget d&eacute;taill&eacute; : Strat&eacute;gie de communication §5.1&ndash;5.3 (Sprint 4) &middot; Plan de pr&eacute;voyance : &lt; 5 % de clics &rarr; A/B testing des accroches (§5.4)</span>
         </div>
         <aside class="notes">
-          Zoom sur l'investissement communication : dix mille euros, pris sur l'enveloppe marketing du budget global, et pilotés au réel. La campagne de lancement, "Unleash Your Archetype", est séquencée sur les dix semaines de réalisation du MVP pour créer une montée en puissance. Phase un, le teasing, semaines une à quatre : une campagne mystère sur TikTok et X — "Quel type de joueur êtes-vous vraiment ?" — sans révéler la solution, pour installer la question de l'archétype. Phase deux, la bêta, semaines cinq à huit : le test d'archétype s'ouvre au panel de trente testeurs, dont les résultats sont partagés sur Instagram avec le hashtag GGHFMyStyle — la preuve sociale avant le lancement. Phase trois, semaines neuf et dix : mise en ligne du MVP relayée par cinq micro-influenceurs pédagogues sur les genres MOBA et RPG. Ensuite, le calendrier éditorial installe une présence régulière sans saturation, et chaque rendez-vous sert un persona précis : le lundi, une astuce courte anti-ragequit sur TikTok pour Alex ; le mercredi, un dossier de fond sur la psychologie du joueur en SEO pour Camille ; le vendredi, un portrait d'archétype esthétique sur Instagram ; le dimanche, le récap communautaire sur Discord pour la rétention. Côté budget : quatre mille euros de publicité sociale calibrés pour cinquante mille impressions mensuelles, trois mille cinq cents euros pour les micro-influenceurs, mille cinq cents de production de contenus et mille d'outils. Et un plan de prévoyance est prêt : si le taux de clic passe sous les cinq pour cent, on bascule sur de l'A/B testing des accroches et une simplification du quiz. Voyons maintenant la viabilité financière d'ensemble.
+          <ul>
+          <li><strong>10 k€</strong> pris sur l'enveloppe marketing, pilotés au réel</li>
+          <li><strong>Campagne « Unleash Your Archetype » :</strong> S1–4 teasing mystère (« Quel type de joueur êtes-vous ? ») → S5–8 bêta 30 testeurs + #GGHFMyStyle (preuve sociale) → S9–10 lancement + 5 micro-influenceurs MOBA/RPG</li>
+          <li><strong>Calendrier édito — chaque rendez-vous sert un persona :</strong> lundi TikTok astuce anti-ragequit (Alex) · mercredi dossier psychologie SEO (Camille) · vendredi portrait d'archétype Instagram · dimanche récap Discord (rétention)</li>
+          <li><strong>Budget :</strong> 4 k€ ads (objectif 50 000 impressions/mois) · 3,5 k€ influence · 1,5 k€ contenus · 1 k€ outils</li>
+          <li><strong>Prévoyance :</strong> &lt; 5 % de clics → A/B testing des accroches + simplification du quiz</li>
+          <li>→ Transition : la viabilité financière d'ensemble</li>
+          </ul>
         </aside>
       </section>
 
@@ -1026,7 +1172,15 @@
           <span class="src">Financement 80 k&euro;, projection 3 ans, sc&eacute;narios &amp; point mort M18 : Business plan &amp; mod&egrave;le financier §4&ndash;5 + tableur FISY-ESSENTIEL (Sprint 3) &middot; Allocation budg&eacute;taire : Cahier des charges §3.5 &middot; D&eacute;tail R&amp;D (14 semaines / 7 sprints, &eacute;quipe build) : Dossier de management §2 &amp; §4.1 (Sprint 3) &middot; KPIs : Strat&eacute;gie marketing §4.2</span>
         </div>
         <aside class="notes">
-          Parlons viabilité. Le besoin de financement initial est de quatre-vingt mille euros, sécurisé par trois sources complémentaires : vingt mille euros d'apports personnels et de capital, quarante mille euros de prêt d'honneur et bancaire, et vingt mille euros de bourse French Tech — rendue crédible par l'éligibilité au statut de Jeune Entreprise Innovante identifiée dès le PESTEL. L'allocation de ces fonds est un choix assumé de Tech Lead : cinquante pour cent du budget — quarante mille euros — vont à la R&D, car le moteur de scoring propriétaire est l'actif différenciant de l'entreprise ; c'est lui qui rend la personnalisation scalable, donc le modèle freemium viable. Concrètement, ces quarante mille euros financent le build sur quatorze semaines, soit sept sprints de deux semaines, tel que planifié dans le dossier de management : le développement fullstack sur Next.js et Symfony, la modélisation data du moteur de scoring et des archétypes, l'intégration de l'API IGDB et du CMS de guides, et le socle DevOps — Docker, pipeline CI/CD et monitoring. Ce n'est pas une dépense, c'est la constitution de l'actif technologique de l'entreprise. Le solde se répartit entre quinze mille euros pour l'UX — la création de l'environnement accueillant et non compétitif —, quinze mille pour le marketing et les contenus, dont l'enveloppe communication de dix mille euros que je viens de détailler, et dix mille euros sanctuarisés pour l'infrastructure et la sécurité, afin de croître sans dette technique majeure. La résilience du plan a été testée par scénarios : dans l'hypothèse optimiste, un partenariat avec un éditeur majeur au dixième mois avance la rentabilité au douzième ; dans l'hypothèse pessimiste — adoption B2B lente et coût d'acquisition client doublé —, le pivot est prêt : réduction de moitié des frais marketing et report du salaire dirigeant au vingt-quatrième mois pour préserver la trésorerie. Côté projections : vingt-deux mille cinq cents euros de chiffre d'affaires en année un, quatre-vingt-quinze mille en année deux, deux cent trente mille en année trois, avec un résultat net qui passe du rouge au vert dès la deuxième année. Le point mort est atteint au dix-huitième mois, et la trésorerie reste positive dans les deux scénarios testés. Le pilotage est data-driven, du taux de complétion du test jusqu'à l'indice de toxicité de la communauté. J'en arrive à ma conclusion.
+          <ul>
+          <li><strong>Financement 80 k€ :</strong> 20 k apports + 40 k prêt d'honneur/bancaire + 20 k bourse French Tech (crédibilisée par l'éligibilité JEI vue au PESTEL)</li>
+          <li><strong>Allocation :</strong> R&amp;D 40 k (50 %) = l'actif différenciant · UX 15 k · marketing-contenus 15 k (dont com 10 k) · infra-sécu 10 k</li>
+          <li><strong>Détail R&amp;D [fragment] :</strong> build 14 semaines / 7 sprints — fullstack Next.js &amp; Symfony, scoring data, IGDB + CMS, socle DevOps → « pas une dépense, la constitution de l'actif technologique »</li>
+          <li><strong>Scénarios :</strong> optimiste = partenariat éditeur M10 → rentable M12 · pessimiste = CAC doublé → pivot : −50 % marketing + salaire dirigeant reporté M24</li>
+          <li><strong>Projections :</strong> CA 22,5 k → 95 k → 230 k · résultat −52 k → +8,5 k → +95 k · <strong>POINT MORT M18</strong></li>
+          <li><strong>Hypothèses CA An 1 :</strong> Premium 4,99 € + rapports B2B 1 500 € + affiliation 5 % · pilotage data-driven (complétion &gt; 70 %, CAC, NPS, toxicité &lt; 1 %)</li>
+          <li>→ Transition : conclusion</li>
+          </ul>
         </aside>
       </section>
 
@@ -1054,7 +1208,14 @@
           </div>
         </div>
         <aside class="notes">
-          Avant les perspectives, un mot de rétrospective honnête sur ce que ce marathon m'a appris — trois apprentissages majeurs. Le premier concerne la posture de Tech Lead : arbitrer, c'est renoncer. J'ai volontairement réduit le périmètre du MVP à trois genres de jeux, reporté l'intelligence artificielle complexe et sorti explicitement certaines fonctionnalités du périmètre. Ces renoncements ne sont pas des faiblesses : ce sont eux qui rendent le projet livrable en dix semaines et le moteur de recommandation validable. La valeur avant la prouesse technique. Le deuxième apprentissage est managérial : la gouvernance à trois niveaux — daily quotidien pour lever les blocages, sprint review bimensuelle avec le panel de testeurs, comité de pilotage mensuel pour les arbitrages stratégiques — combinée à la matrice RACI et à la règle "une anomalie, un ticket", m'a montré que la clarté des rôles libère une équipe au lieu de la contraindre. Chacun sait qui décide, qui fait, qui est consulté : l'énergie va dans la production, pas dans la friction. Le troisième apprentissage porte sur la gestion de l'incertitude : entre la V1 et la V2 du prototype, les tests utilisateurs ont invalidé mes certitudes — l'onboarding jugé trop long a été raccourci, la hiérarchie visuelle des guides refondue, les contrastes alignés sur les normes WCAG. Le feedback utilisateur tranche là où l'intuition débat sans fin. En synthèse : GGHF démontre qu'une conviction de joueur peut devenir un produit architecturé et un modèle économique crédible. Reste à se projeter : voici la roadmap.
+          <ul>
+          <li><strong>3 apprentissages du marathon</strong></li>
+          <li><strong>Posture Tech Lead — arbitrer = renoncer :</strong> MVP 3 genres, IA complexe reportée, hors-périmètre assumé → ces renoncements rendent le projet livrable · « la valeur avant la prouesse »</li>
+          <li><strong>Management :</strong> gouvernance 3 niveaux (daily · sprint review + panel · COPIL mensuel) + RACI + 1 anomalie = 1 ticket → la clarté des rôles libère l'équipe</li>
+          <li><strong>Incertitude :</strong> V1→V2 = onboarding raccourci, hiérarchie visuelle refondue, contrastes WCAG → « le feedback utilisateur tranche là où l'intuition débat »</li>
+          <li><strong>Synthèse :</strong> une conviction de joueur → un produit architecturé → un modèle économique crédible</li>
+          <li>→ Transition : la roadmap</li>
+          </ul>
         </aside>
       </section>
 
@@ -1097,7 +1258,14 @@
           </div>
         </div>
         <aside class="notes">
-          Je termine par la roadmap technique, qui illustre pourquoi mes choix d'architecture n'étaient pas seulement des choix de confort, mais des paris sur l'avenir. Aujourd'hui, le MVP web est en ligne sur Vercel, avec le profilage en version deux et trois genres couverts. À six mois : l'application mobile native. Grâce à l'architecture headless, le backend Symfony existant l'alimente tel quel — zéro réécriture serveur, c'est le retour sur investissement direct du découplage. À douze mois : l'enrichissement du moteur de scoring par apprentissage automatique, nourri par les données de progression accumulées, et la connexion aux API de Steam et de Riot pour un profilage basé sur le comportement de jeu réel, plus seulement déclaratif. Et la vision à long terme, celle qui me motive le plus : l'overlay in-game en temps réel — un SDK proposé aux studios pour que le micro-learning GGHF s'affiche contextuellement dans le jeu, au moment exact où le joueur en a besoin. Ce serait l'aboutissement du positionnement de médiateur : ne plus être à côté du jeu, mais dans le jeu. La boucle serait bouclée : le joueur frustré de mes débuts, celui des soixante-deux pour cent, ne quitterait plus jamais la partie faute d'avoir été accompagné. Merci de votre attention — le prototype est consultable à l'adresse affichée, et je suis maintenant à votre disposition pour les questions.
+          <ul>
+          <li><strong>Aujourd'hui :</strong> MVP web en ligne (Vercel), profilage V2, 3 genres</li>
+          <li><strong>M+6 :</strong> app mobile native — même API headless, zéro réécriture serveur = ROI direct du découplage</li>
+          <li><strong>M+12 :</strong> scoring enrichi par ML (données de progression) + API Steam/Riot → profilage comportemental, plus seulement déclaratif</li>
+          <li><strong>Vision :</strong> overlay in-game temps réel (SDK studios) — le médiateur DANS le jeu, au moment exact du besoin</li>
+          <li><strong>Boucle bouclée :</strong> le joueur des 62 % ne quittera plus jamais la partie faute d'accompagnement</li>
+          <li><strong>Merci</strong> — rappeler l'URL du prototype → place aux questions</li>
+          </ul>
         </aside>
       </section>
 
